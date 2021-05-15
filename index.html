@@ -1,32 +1,33 @@
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>brechtserckx.be - $title$</title>
     <link rel="stylesheet" href="/css/default.css" />
-  </head>
+</head>
 
 
-  <body>
+<body>
     <main>
         <div id="title" class="block">
             <h1>brechtserckx.be</h1>
         </div>
         <div id="menu" class="block">
-          <div class="menu-item">
-            <a href="#title">Home</a>
-          </div>
-          $for(posts)$
-          <div class="menu-item">
-            <a href="#$path$">$title$</a>
-          </div>
-          $endfor$
+            <div class="menu-item">
+                <a href="#title">Home</a>
+            </div>
+            $for(posts)$
+            <div class="menu-item">
+                <a href="#$path$">$title$</a>
+            </div>
+            $endfor$
         </div>
 
         <div id="content message">
-          $for(posts)$
+            $for(posts)$
             <div id="$path$" class="block content">
                 <h3>$title$</h3>
                 $body$
@@ -34,11 +35,12 @@
             $endfor$
         </div>
 
-      <footer>
-        This website is made with some HTML &#128154, some CSS &#9889 and some spare time &#8986. (and with
-        <a href="http://jaspervdj.be/hakyll">Hakyll</a>)
-      </footer>
+        <footer>
+            This website is made with some HTML &#128154, some CSS &#9889 and some spare time &#8986. (and with
+            <a href="http://jaspervdj.be/hakyll">Hakyll</a>)
+        </footer>
     </main>
 
-  </body>
+</body>
+
 </html>

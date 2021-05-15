@@ -12,10 +12,7 @@ main = hakyll $ do
 
   match "posts/*" $ do
     route $ setExtension "html"
-    compile
-      $   pandocCompiler
-      >>= loadAndApplyTemplate "templates/post.html" postCtx
-      >>= relativizeUrls
+    compile $ pandocCompiler >>= relativizeUrls
 
   match "index.html" $ do
     route idRoute
@@ -26,8 +23,3 @@ main = hakyll $ do
               `mappend` defaultContext
 
       getResourceBody >>= applyAsTemplate indexCtx >>= relativizeUrls
-
-  match "templates/*" $ compile templateBodyCompiler
-
--- postCtx = pathField "id" `mappend` defaultContext
-postCtx = defaultContext
