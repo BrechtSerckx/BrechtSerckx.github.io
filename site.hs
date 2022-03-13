@@ -1,6 +1,7 @@
 module Main where
 
 import           Hakyll
+import           Data.List                      ( sortOn )
 
 main :: IO ()
 main = hakyll siteRules
@@ -40,19 +41,32 @@ siteRules = do
   create ["about.html"] $ do
     route idRoute
     compile $ do
-      let aboutId         = "data/about.md"
-          aboutTemplate   = "templates/about.html"
-          defaultTemplate = "templates/default.html"
+      let bodyCtx     = field "body" $ \_ -> loadBody "data/about.md"
+          metadataCtx = metadataFieldFrom "data/about.md"
+          templateCtx = metadataFieldFrom "templates/about.html"
+      makeItem ""
+        >>= loadAndApplyTemplate "templates/about.html"
+                                 (bodyCtx <> metadataCtx <> defaultContext)
+        >>= loadAndApplyTemplate
+              "templatesDefault.html"
+              (templateCtx <> metadataCtx <> defaultContext)
+        >>= relativizeUrls
+
+  create ["professional.html"] $ do
+    route idRoute
+    compile $ do
+      items <- sortOn itemIdentifier <$> loadAll "data/professional/*"
+      let bodyCtx     = field "body" $ \_ -> loadBody "data/professional.md"
+          itemsCtx    = listField "items" defaultContext (pure items)
+          metadataCtx = metadataFieldFrom "data/professional.md"
+          templateCtx = metadataFieldFrom "templates/professional.html"
       makeItem ""
         >>= loadAndApplyTemplate
-              aboutTemplate
-              (  bodyFieldFrom aboutId
-              <> metadataFieldFrom [aboutId]
-              <> defaultContext
-              )
+              "templates/professional.html"
+              (bodyCtx <> itemsCtx <> metadataCtx <> defaultContext)
         >>= loadAndApplyTemplate
-              defaultTemplate
-              (metadataFieldFrom [aboutTemplate, aboutId] <> defaultContext)
+              "templatesDefault.html"
+              (templateCtx <> metadataCtx <> defaultContext)
         >>= relativizeUrls
 
   match "templates/*" $ compile templateBodyCompiler
