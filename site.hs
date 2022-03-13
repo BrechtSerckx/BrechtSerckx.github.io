@@ -37,6 +37,24 @@ siteRules = do
               (templateCtx <> metadataCtx <> defaultContext)
         >>= relativizeUrls
 
+  create ["about.html"] $ do
+    route idRoute
+    compile $ do
+      let aboutId         = "data/about.md"
+          aboutTemplate   = "templates/about.html"
+          defaultTemplate = "templates/default.html"
+      makeItem ""
+        >>= loadAndApplyTemplate
+              aboutTemplate
+              (  bodyFieldFrom aboutId
+              <> metadataFieldFrom [aboutId]
+              <> defaultContext
+              )
+        >>= loadAndApplyTemplate
+              defaultTemplate
+              (metadataFieldFrom [aboutTemplate, aboutId] <> defaultContext)
+        >>= relativizeUrls
+
   match "templates/*" $ compile templateBodyCompiler
 
 metadataFieldFrom :: Identifier -> Context a
