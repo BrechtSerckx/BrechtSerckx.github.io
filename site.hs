@@ -2,6 +2,9 @@ module Main where
 
 import           Hakyll
 import           Data.List                      ( sortOn )
+import           System.FilePath                ( (</>)
+                                                , addExtension
+                                                )
 
 main :: IO ()
 main = hakyll siteRules
@@ -24,74 +27,45 @@ siteRules = do
 
   match "data/**.md" $ compile pandocCompiler
 
-  create ["index.html"] $ do
-    route idRoute
-    compile $ do
-      let bodyCtx     = field "body" $ \_ -> loadBody "data/index.md"
-          metadataCtx = metadataFieldFrom "data/index.md"
-          templateCtx = metadataFieldFrom "templates/index.html"
-      makeItem ""
-        >>= loadAndApplyTemplate "templates/index.html"
-                                 (bodyCtx <> metadataCtx <> defaultContext)
-        >>= loadAndApplyTemplate
-              "templatesDefault.html"
-              (templateCtx <> metadataCtx <> defaultContext)
-        >>= relativizeUrls
-
-  create ["about.html"] $ do
-    route idRoute
-    compile $ do
-      let bodyCtx     = field "body" $ \_ -> loadBody "data/about.md"
-          metadataCtx = metadataFieldFrom "data/about.md"
-          templateCtx = metadataFieldFrom "templates/about.html"
-      makeItem ""
-        >>= loadAndApplyTemplate "templates/about.html"
-                                 (bodyCtx <> metadataCtx <> defaultContext)
-        >>= loadAndApplyTemplate
-              "templatesDefault.html"
-              (templateCtx <> metadataCtx <> defaultContext)
-        >>= relativizeUrls
-
-  create ["professional.html"] $ do
-    route idRoute
-    compile $ do
-      items <- sortOn itemIdentifier <$> loadAll "data/professional/*"
-      let bodyCtx     = field "body" $ \_ -> loadBody "data/professional.md"
-          itemsCtx    = listField "items" defaultContext (pure items)
-          metadataCtx = metadataFieldFrom "data/professional.md"
-          templateCtx = metadataFieldFrom "templates/professional.html"
-      makeItem ""
-        >>= loadAndApplyTemplate
-              "templates/professional.html"
-              (bodyCtx <> itemsCtx <> metadataCtx <> defaultContext)
-        >>= loadAndApplyTemplate
-              "templatesDefault.html"
-              (templateCtx <> metadataCtx <> defaultContext)
-        >>= relativizeUrls
-
-  create ["projects.html"] $ do
-    route idRoute
-    compile $ do
-      let projectsId       = "data/projects.md"
-          projectsTemplate = "templates/projects.html"
-          defaultTemplate  = "templates/default.html"
-      items <- sortOn itemIdentifier <$> loadAll "data/projects/*"
-      makeItem ""
-        >>= loadAndApplyTemplate
-              projectsTemplate
-              (  bodyFieldFrom projectsId
-              <> listField "items" defaultContext (pure items)
-              <> metadataFieldFrom [projectsId]
-              <> defaultContext
-              )
-        >>= loadAndApplyTemplate
-              defaultTemplate
-              (  metadataFieldFrom [projectsTemplate, projectsId]
-              <> defaultContext
-              )
-        >>= relativizeUrls
+  create ["index", "about"]           pageRule
+  create ["professional", "projects"] pageRuleWithSubdir
 
   match "templates/*" $ compile templateBodyCompiler
+
+pageRule :: Rules ()
+pageRule = pageRuleWith . const $ pure mempty
+
+pageRuleWithSubdir :: Rules ()
+pageRuleWithSubdir = pageRuleWith $ \id' -> do
+  let dataDir = fromGlob $ "data" </> toFilePath id' </> "*"
+  items <- sortOn itemIdentifier <$> loadAll dataDir
+  pure $ listField "items" defaultContext (pure items)
+
+pageRuleWith :: (Identifier -> Compiler (Context String)) -> Rules ()
+pageRuleWith mkExtraCtx = do
+    -- Route to `<id>.html`
+  route . customRoute $ \id' -> addExtension (toFilePath id') "html"
+
+  -- Compile, filling in the data from `data/<id>.md` in the nested templates.
+  -- If a subdirectory `data/<id>/` exists, make its contents available in
+  -- `items` list.
+  compile $ do
+    id' <- getUnderlying
+    let routeFile =
+          fromFilePath $ "data" </> addExtension (toFilePath id') "md"
+        routeTemplate =
+          fromFilePath $ "templates" </> addExtension (toFilePath id') "html"
+        bodyCtx     = field "body" $ \_ -> loadBody routeFile
+        metadataCtx = metadataFieldFrom routeFile
+        templateCtx = metadataFieldFrom routeTemplate
+    extraCtx <- mkExtraCtx id'
+    makeItem ""
+      >>= loadAndApplyTemplate
+            routeTemplate
+            (bodyCtx <> extraCtx <> metadataCtx <> defaultContext)
+      >>= loadAndApplyTemplate "templates/default.html"
+                               (templateCtx <> metadataCtx <> defaultContext)
+      >>= relativizeUrls
 
 metadataFieldFrom :: Identifier -> Context a
 metadataFieldFrom id' = Context $ \k _ _i -> do
