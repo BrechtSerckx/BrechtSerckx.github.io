@@ -69,6 +69,28 @@ siteRules = do
               (templateCtx <> metadataCtx <> defaultContext)
         >>= relativizeUrls
 
+  create ["projects.html"] $ do
+    route idRoute
+    compile $ do
+      let projectsId       = "data/projects.md"
+          projectsTemplate = "templates/projects.html"
+          defaultTemplate  = "templates/default.html"
+      items <- sortOn itemIdentifier <$> loadAll "data/projects/*"
+      makeItem ""
+        >>= loadAndApplyTemplate
+              projectsTemplate
+              (  bodyFieldFrom projectsId
+              <> listField "items" defaultContext (pure items)
+              <> metadataFieldFrom [projectsId]
+              <> defaultContext
+              )
+        >>= loadAndApplyTemplate
+              defaultTemplate
+              (  metadataFieldFrom [projectsTemplate, projectsId]
+              <> defaultContext
+              )
+        >>= relativizeUrls
+
   match "templates/*" $ compile templateBodyCompiler
 
 metadataFieldFrom :: Identifier -> Context a
