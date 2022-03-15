@@ -5,6 +5,7 @@ in pkgs.haskellPackages.shellFor {
     haskellPackages.cabal-install
     haskellPackages.ghcid
     haskellPackages.hlint
+    haskellPackages.brittany
     nodePackages.js-beautify
   ];
 }
