@@ -29,10 +29,12 @@ executable brechtserckx-be
     , text >= 1.2
     , pandoc >= 2.10
     , hakyll-sass >= 0.2.4 && < 0.3
+    , yaml >= 0.11
   hs-source-dirs:
     .
     src
   other-modules:
     Data.Aeson.Path
     Hakyll.Web.Template.Context.Path
+    Hakyll.Web.Template.Context.Yaml
     Hakyll.Web.Pandoc.Metadata
