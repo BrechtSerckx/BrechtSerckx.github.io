@@ -12,6 +12,7 @@ $primary: $blue;
 $info: $green;
 $text: $dark;
 $title-color: $dark;
+$navbar-title-color: $light;
 // $footer-background-color: $light;
 
 // Import Bulma
@@ -22,3 +23,10 @@ $title-color: $dark;
 
 // Import Bulma-list
 @import "../bulma-list/sass/bulma-list.sass";
+
+
+// sitename is a subtitle with normal navbar color
+.navbar-sitename {
+    @extend .subtitle;
+    color: $navbar-background-color;
+}
