@@ -65,3 +65,8 @@ body {
 body > main {
     flex: 1;
 }
+
+// hide vertical scrollbar when not necessary
+html {
+    overflow-y: auto;
+}
