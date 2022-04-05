@@ -8,24 +8,37 @@ module Data.Aeson.Path
   )
 where
 
+import           Control.Applicative            ( (<|>) )
 import           Data.Aeson.Types               ( JSONPath
-                                                , Value(..)
                                                 , JSONPathElement(..)
+                                                , Value(..)
+                                                , Object
                                                 )
 import qualified Data.HashMap.Strict           as HM
+import qualified Data.Text                     as Text
 import qualified Data.Vector                   as Vector
+import           Data.Vector                    ( Vector )
 import qualified Text.Parsec                   as Parsec
 import qualified Text.Parsec.String            as Parsec
-import qualified Data.Text                     as Text
-import           Control.Applicative
+import           Data.Text                      ( Text )
 
-lookupPath :: JSONPath -> Value -> Maybe Value
-lookupPath [] v = Just v
-lookupPath (Key key : rest) (Object obj) =
-  HM.lookup key obj >>= lookupPath rest
-lookupPath (Key   _ : _   ) _v         = error "Expected object"
-lookupPath (Index i : rest) (Array ls) = ls Vector.!? i >>= lookupPath rest
-lookupPath (Index _ : _   ) _v         = error "Expected array"
+data PathLookupError
+  = IndexError Int (Vector Value)
+  | KeyError Text Object
+  | ExpectedArray Int Value
+  | ExpectedObject Text Value
+  deriving Show
+
+lookupPath :: JSONPath -> Value -> Either PathLookupError Value
+lookupPath []               v            = Right v
+lookupPath (Key key : rest) (Object obj) = case HM.lookup key obj of
+  Nothing -> Left $ KeyError key obj
+  Just v  -> lookupPath rest v
+lookupPath (Key   key : _   ) v          = Left $ ExpectedObject key v
+lookupPath (Index i   : rest) (Array ls) = case ls Vector.!? i of
+  Nothing -> Left $ IndexError i ls
+  Just v  -> lookupPath rest v
+lookupPath (Index i : _) v = Left $ ExpectedArray i v
 
 pathParser :: Parsec.Parser JSONPath
 pathParser =

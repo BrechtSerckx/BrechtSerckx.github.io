@@ -1,20 +1,18 @@
 module Main where
 
+import           Data.List                      ( sortOn )
+import           Hakyll.Web.Template.Context.Path
+                                                ( metadataContext )
+import qualified Data.Yaml                     as Yaml
 import           Hakyll
 import           Hakyll.Web.Sass                ( sassCompiler )
-import           Data.List                      ( sortOn )
 import           System.FilePath                ( (</>)
                                                 , addExtension
                                                 )
-import           Hakyll.Web.Template.Context.Path
-                                                ( metadataPathFrom )
-import           Hakyll.Web.Template.Context.Yaml
-                                                ( yamlMetadataPathFrom )
-import           Hakyll.Web.Pandoc.Metadata     ( readMetadataValueWith )
-import           Text.Pandoc.Options            ( readerExtensions
-                                                , githubMarkdownExtensions
-                                                , ReaderOptions
+import           Text.Pandoc.Options            ( ReaderOptions
                                                 , WriterOptions
+                                                , githubMarkdownExtensions
+                                                , readerExtensions
                                                 )
 
 main :: IO ()
@@ -66,36 +64,40 @@ pageRuleWith mkExtraCtx = do
   -- `items` list.
   compile $ do
     id' <- getUnderlying
-    let
-      routeFile = fromFilePath $ "data" </> addExtension (toFilePath id') "md"
-      routeTemplate =
-        fromFilePath $ "templates" </> addExtension (toFilePath id') "html"
-      bodyCtx     = field "body" $ \_ -> loadBody routeFile
-      metadataCtx = metadataPathFrom
-        (readMetadataValueWith readerOptions writerOptions)
-        routeFile
-      templateCtx = metadataPathFrom
-        (readMetadataValueWith readerOptions writerOptions)
-        routeTemplate
-      settingsCtx = yamlMetadataPathFrom
-        (readMetadataValueWith readerOptions writerOptions)
-        "data/default.yaml"
-      defaultBodyCtx = bodyField "body"
-      defaultUrlCtx  = urlField "url"
-    extraCtx <- mkExtraCtx id'
+    let routeFile =
+          fromFilePath $ "data" </> addExtension (toFilePath id') "md"
+        routeTemplate =
+          fromFilePath $ "templates" </> addExtension (toFilePath id') "html"
+        bodyCtx        = field "body" $ \_ -> loadBody routeFile
+        defaultBodyCtx = bodyField "body"
+        defaultUrlCtx  = urlField "url"
+    pageMetadata     <- getMetadata routeFile
+    templateMetadata <- getMetadata routeTemplate
+    settings <- unsafeCompiler $ Yaml.decodeFileThrow "data/default.yaml"
+    extraCtx         <- mkExtraCtx id'
     makeItem ""
       >>= loadAndApplyTemplate
             routeTemplate
-            (bodyCtx <> extraCtx <> metadataCtx <> settingsCtx <> defaultUrlCtx)
+            (mkCtx $ \ctx ->
+              bodyCtx
+                <> extraCtx
+                <> metadataContext (Just pageMetadata) ctx
+                <> metadataContext (Just settings)     ctx
+                <> defaultUrlCtx
+            )
       >>= loadAndApplyTemplate
             "templates/default.html"
-            (  templateCtx
-            <> metadataCtx
-            <> settingsCtx
-            <> defaultBodyCtx
-            <> defaultUrlCtx
+            (mkCtx $ \ctx ->
+              metadataContext (Just templateMetadata) ctx
+                <> metadataContext (Just pageMetadata) ctx
+                <> metadataContext (Just settings)     ctx
+                <> defaultBodyCtx
+                <> defaultUrlCtx
             )
       >>= relativizeUrls
+
+mkCtx :: (Context a -> Context a) -> Context a
+mkCtx withCtx = withCtx $ mkCtx withCtx
 
 readerOptions :: ReaderOptions
 readerOptions =
