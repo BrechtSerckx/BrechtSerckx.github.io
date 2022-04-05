@@ -58,13 +58,16 @@ pageRuleWith mkExtraCtx = do
         bodyCtx     = field "body" $ \_ -> loadBody routeFile
         metadataCtx = metadataFieldFrom routeFile
         templateCtx = metadataFieldFrom routeTemplate
+        settingsCtx = metadataFieldFrom "data/default.md"
     extraCtx <- mkExtraCtx id'
     makeItem ""
       >>= loadAndApplyTemplate
             routeTemplate
-            (bodyCtx <> extraCtx <> metadataCtx <> defaultContext)
-      >>= loadAndApplyTemplate "templates/default.html"
-                               (templateCtx <> metadataCtx <> defaultContext)
+            (bodyCtx <> extraCtx <> metadataCtx <> settingsCtx <> defaultContext
+            )
+      >>= loadAndApplyTemplate
+            "templates/default.html"
+            (templateCtx <> metadataCtx <> settingsCtx <> defaultContext)
       >>= relativizeUrls
 
 metadataFieldFrom :: Identifier -> Context a
