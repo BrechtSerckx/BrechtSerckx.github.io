@@ -5,14 +5,15 @@
 
 <!-- curriculum -->
 <h2 class="title is-3">$curriculum$</h2>
-<div class="block content">
-    <ul>
-        $for(items)$
-        <li>
-            <p>$title$</p>
-            <p>$body$</p>
-        </li>
-        $endfor$
-    </ul>
 
+<div class="timeline">
+  $for(items)$
+  <div class="timeline-item is-info">
+    <div class="timeline-marker is-primary"></div>
+    <div class="timeline-content">
+      <p class="heading">$date$: $title$</p>
+      $body$
+    </div>
+  </div>
+  $endfor$
 </div>
