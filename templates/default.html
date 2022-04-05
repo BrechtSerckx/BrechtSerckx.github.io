@@ -64,8 +64,36 @@
                 </div>
                 $endfor$
             </div>
+            <nav class="level">
+                <div class="level-item has-text-centered">
+                    <button class="button js-modal-trigger" data-target="modal-credits">
+                        Credits
+                    </button>
+                </div>
+            </nav>
         </div>
     </footer>
+    <div id="modal-credits" class="modal">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">Credits</p>
+                <button class="delete" aria-label="close"></button>
+            </header>
+            <section class="modal-card-body">
+                <ul>
+                    $for(footer.credits)$
+                    <li>
+                        $body$
+                    </li>
+                    $endfor$
+                </ul>
+            </section>
+            <footer class="modal-card-foot">
+                <button class="button is-success" aria-label="close">Thanks dudes!</button>
+            </footer>
+        </div>
+    </div>
 </body>
 
 </html>

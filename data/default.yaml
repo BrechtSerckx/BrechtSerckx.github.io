@@ -20,3 +20,8 @@ footer:
     - icon: 'templates/footer/links/linkedin.svg'
       link: 'https://www.linkedin.com/in/brecht-serckx-7b2760207/'
   iconsize: '32px'
+  credits:
+    - 'Email icon from <a href="https://www.reshot.com/free-svg-icons/item/email-CKBGAZPJ8U/" target="_blank" rel="noopener noreferrer">Reshot</a>'
+    - 'Brand icons from <a href="https://simpleicons.org/" target="_blank" rel="noopener noreferrer">Simple Icons</a>'
+    - 'Made with <a href="https://bulma.io/" target="_blank" rel="noopener noreferrer">Bulma</a> and <a href="https://wikiki.github.io/" target="_blank" rel="noopener noreferrer">Bulma-extensions</a>'
+    - 'Made with <a href="https://jaspervdj.be/hakyll/" target="_blank" rel="noopener noreferrer">Hakyll</a>'
