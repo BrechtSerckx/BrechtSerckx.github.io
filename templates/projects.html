@@ -6,13 +6,15 @@
 <h2 class="title is-3">$projects$</h2>
 
 <!-- professional passtime -->
-<div class="block content">
-    <ul>
+<div class="block">
+    <div class="list">
         $for(items)$
-        <li>
-            <p>$title$</p>
-            <p>$body$</p>
-        </li>
+        <div class="list-item">
+            <div class="list-item-content">
+                <div class="list-item-title">$title$</div>
+                <div class="list-item-description">$body$</div>
+            </div>
+        </div>
         $endfor$
-    </ul>
+    </div>
 </div>
