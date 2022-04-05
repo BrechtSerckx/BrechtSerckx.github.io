@@ -1,13 +1,18 @@
 <!-- small introduction text about this website -->
-$body$
+<div class="block">
+    $body$
+</div>
 
 <!-- curriculum -->
-<h2>$curriculum$</h2>
-<ul>
-    $for(items)$
-    <li>
-        <p>$title$</p>
-        <p>$body$</p>
-    </li>
-    $endfor$
-</ul>
+<h2 class="title is-3">$curriculum$</h2>
+<div class="block content">
+    <ul>
+        $for(items)$
+        <li>
+            <p>$title$</p>
+            <p>$body$</p>
+        </li>
+        $endfor$
+    </ul>
+
+</div>
