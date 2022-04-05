@@ -1,6 +1,7 @@
 ---
-image: /images/me.jpg
+image: /images/index.jpg
 subtitle: Greetings, internet traveler.
+imagesize: '300px'
 ---
 
 It is an honor to welcome you on my humble website.  

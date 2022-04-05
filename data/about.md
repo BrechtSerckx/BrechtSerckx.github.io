@@ -1,6 +1,6 @@
 ---
 title: About me
-image: /images/me.jpg
+image: /images/about.jpg
 ---
 
 Hi. My name is [Brecht Serckx](https://brechtserckx.be). I am approximately 27 years old.   
