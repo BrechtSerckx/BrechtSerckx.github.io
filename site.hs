@@ -1,7 +1,9 @@
 module Main where
 
-import           Hakyll
 import           Data.List                      ( sortOn )
+import           Hakyll
+import           Hakyll.Web.Template.Context.Path
+                                                ( metadataPathFrom )
 import           System.FilePath                ( (</>)
                                                 , addExtension
                                                 )
@@ -56,9 +58,9 @@ pageRuleWith mkExtraCtx = do
         routeTemplate =
           fromFilePath $ "templates" </> addExtension (toFilePath id') "html"
         bodyCtx     = field "body" $ \_ -> loadBody routeFile
-        metadataCtx = metadataFieldFrom routeFile
-        templateCtx = metadataFieldFrom routeTemplate
-        settingsCtx = metadataFieldFrom "data/default.md"
+        metadataCtx = metadataPathFrom pure routeFile
+        templateCtx = metadataPathFrom pure routeTemplate
+        settingsCtx = metadataPathFrom pure "data/default.md"
     extraCtx <- mkExtraCtx id'
     makeItem ""
       >>= loadAndApplyTemplate
@@ -69,14 +71,3 @@ pageRuleWith mkExtraCtx = do
             "templates/default.html"
             (templateCtx <> metadataCtx <> settingsCtx <> defaultContext)
       >>= relativizeUrls
-
-metadataFieldFrom :: Identifier -> Context a
-metadataFieldFrom id' = Context $ \k _ _i -> do
-  let empty' =
-        noResult
-          $  "No '"
-          ++ k
-          ++ "' field in metadata "
-          ++ "of items "
-          ++ show id'
-  maybe empty' (return . StringField) =<< getMetadataField id' k

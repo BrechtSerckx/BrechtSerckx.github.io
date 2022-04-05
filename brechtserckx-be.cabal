@@ -32,3 +32,4 @@ executable brechtserckx-be
     src
   other-modules:
     Data.Aeson.Path
+    Hakyll.Web.Template.Context.Path
