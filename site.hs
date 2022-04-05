@@ -36,7 +36,7 @@ siteRules = do
     route $ setExtension "css"
     compile $ fmap compressCss <$> sassCompiler
 
-  match "data/**.md" $ compile pandocCompiler
+  match "data/**.md" . compile $ pandocCompilerWith readerOptions writerOptions
 
   create ["index", "about"]           pageRule
   create ["professional", "projects"] pageRuleWithSubdir
