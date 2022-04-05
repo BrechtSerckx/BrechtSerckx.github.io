@@ -3,11 +3,13 @@ module Main where
 import           Hakyll
 import           Hakyll.Web.Sass                ( sassCompiler )
 import           Data.List                      ( sortOn )
-import           Hakyll.Web.Template.Context.Path
-                                                ( metadataPathFrom )
 import           System.FilePath                ( (</>)
                                                 , addExtension
                                                 )
+import           Hakyll.Web.Template.Context.Path
+                                                ( metadataPathFrom )
+import           Hakyll.Web.Template.Context.Yaml
+                                                ( yamlMetadataPathFrom )
 import           Hakyll.Web.Pandoc.Metadata     ( readMetadataValueWith )
 import           Text.Pandoc.Options            ( readerExtensions
                                                 , githubMarkdownExtensions
@@ -71,9 +73,9 @@ pageRuleWith mkExtraCtx = do
       templateCtx = metadataPathFrom
         (readMetadataValueWith readerOptions writerOptions)
         routeTemplate
-      settingsCtx = metadataPathFrom
+      settingsCtx = yamlMetadataPathFrom
         (readMetadataValueWith readerOptions writerOptions)
-        "data/default.md"
+        "data/default.yaml"
     extraCtx <- mkExtraCtx id'
     makeItem ""
       >>= loadAndApplyTemplate
@@ -84,9 +86,6 @@ pageRuleWith mkExtraCtx = do
             "templates/default.html"
             (templateCtx <> metadataCtx <> settingsCtx <> defaultContext)
       >>= relativizeUrls
-
-bodyFieldFrom :: Identifier -> Context a
-bodyFieldFrom id' = field "body" $ \_ -> loadBody id'
 
 readerOptions :: ReaderOptions
 readerOptions =
