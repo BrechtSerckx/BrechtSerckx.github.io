@@ -16,6 +16,7 @@
 
 <body>
     <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
+      <div class="container is-max-desktop">
         <div class="navbar-brand">
             <a class="navbar-item" href="/">
                 <span class="navbar-sitename is-3">
@@ -46,19 +47,24 @@
                 </a>
 
             </div>
+        </div>
     </nav>
 
     <main role="main" class="section">
-        <div class="container">
-            $if(title)$
-            <h1 class="title is-1">$title$</h1>
-            $endif$
-            $body$
+        <div class="container is-max-desktop">
+            <div class="block">
+                $if(title)$
+                <h1 class="title is-1">$title$</h1>
+                $endif$
+                $body$
+            </div>
         </div>
     </main>
 
     <footer class="footer">
-        <div class="content">$footer$</div>
+        <div class="container is-max-desktop">
+            <div class="content">$footer$</div>
+        </div>
     </footer>
 </body>
 
