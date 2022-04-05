@@ -56,26 +56,13 @@
     <footer class="footer">
         <div class="container is-max-desktop">
             <div class="level is-mobile">
+                $for(footer.links)$
                 <div class="level-item has-text-centered">
-                    <a href="$footer.links.email.link$" target="_blank" rel="noopener noreferrer">
-                        $partial("templates/footer/links/email.svg")$
+                    <a href="$link$" target="_blank" rel="noopener noreferrer">
+                        $partial(icon)$
                     </a>
                 </div>
-                <div class="level-item has-text-centered">
-                    <a href="$footer.links.github.link$" target="_blank" rel="noopener noreferrer">
-                        $partial("templates/footer/links/github.svg")$
-                    </a>
-                </div>
-                <div class="level-item has-text-centered">
-                    <a href="$footer.links.haskell.link$" target="_blank" rel="noopener noreferrer">
-                        $partial("templates/footer/links/haskell.svg")$
-                    </a>
-                </div>
-                <div class="level-item has-text-centered">
-                    <a href="$footer.links.linkedin.link$" target="_blank" rel="noopener noreferrer">
-                        $partial("templates/footer/links/linkedin.svg")$
-                    </a>
-                </div>
+                $endfor$
             </div>
         </div>
     </footer>
