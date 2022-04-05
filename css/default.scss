@@ -1,6 +1,18 @@
 @charset "utf-8";
 
-$primary: #FF0000;
+$blue: #006992;
+$green: #79AEA3;
+$orange: #F49E4C;
+$dark: #0E131F;
+// $dark: #FF0000;
+$light: #F1E3F3;
+// $light: #00FF00;
+
+$primary: $blue;
+$info: $green;
+$text: $dark;
+$title-color: $dark;
+// $footer-background-color: $light;
 
 // Import Bulma
 @import "../bulma/bulma.sass";
