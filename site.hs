@@ -45,7 +45,7 @@ siteRules = do
   create ["index", "about"]           pageRule
   create ["professional", "projects"] pageRuleWithSubdir
 
-  match "templates/*" $ compile templateBodyCompiler
+  match "templates/**" $ compile templateBodyCompiler
 
 pageRule :: Rules ()
 pageRule = pageRuleWith . const $ pure mempty

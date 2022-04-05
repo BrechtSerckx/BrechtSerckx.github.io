@@ -1,7 +1,16 @@
 sitename: 'brechtserckx.be'
 footer: 
- pandoc: .md
- value: '
-  This website is made with some HTML :green_heart:, some CSS :zap: and some spare time :watch:. (and with
-        <a href="http://jaspervdj.be/hakyll">Hakyll</a>)
-  '
+  links:
+    email:
+      icon: '/images/email.svg'
+      link: 'mailto:professional at brechtserckx dot be'
+    github:
+      icon: '/images/github.svg'
+      link: 'https://github.com/BrechtSerckx'
+    haskell:
+      icon: '/images/haskell.svg'
+      link: 'https://discourse.haskell.org/u/brechtserckx/summary'
+    linkedin:
+      icon: '/images/linkedin.svg'
+      link: 'https://www.linkedin.com/in/brecht-serckx-7b2760207/'
+  iconsize: '48px'
