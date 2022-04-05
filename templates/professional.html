@@ -9,7 +9,9 @@
 <div class="timeline">
     $for(items)$
     <div class="timeline-item is-info">
-        <div class="timeline-marker is-primary"></div>
+        <div class="timeline-marker is-image is-$iconsize$x$iconsize$">
+          <img src="$icon$" width="$iconsize$" height="$iconsize$"  >
+        </div>
         <div class="timeline-content">
             <p class="title is-4">$date$: $title$</p>
             $if(subtitle)$

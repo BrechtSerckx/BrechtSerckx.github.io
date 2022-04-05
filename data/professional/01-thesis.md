@@ -2,6 +2,7 @@
 date: 2018 - 2019
 title: Master's Thesis
 subtitle: Under supervision of Prof. Dr. Ir. Tom Schrijvers
+icon: /images/thesis.svg
 ---
 _Eff_ is an experimental functional programming language that considers computational side effects as algebraic operations or effects and captures them with effect handlers.  
 Eff is compiled to OCaml via the internal calculi _ImpEff_ and _ExEff_.

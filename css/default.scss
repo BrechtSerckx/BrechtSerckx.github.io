@@ -18,6 +18,9 @@ $navbar-title-color: $light;
 // Import Bulma
 @import "../bulma/bulma.sass";
 
+// $timeline-icon-size: $size-6;
+$timeline-content-padding: 1em 0 0 3em;
+
 // Import Bulma-timeline
 @import "../bulma-timeline/dist/css/bulma-timeline.sass";
 

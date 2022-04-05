@@ -2,6 +2,7 @@
 date: 2019 - present
 title: Backend Haskell Developer
 subtitle: CentralApp, Brussels, Belgium
+icon: '/images/centralapp.png'
 ---
 CentralApp is a startup that takes care of the online presence local businesses.
 We provide a platform that generates a custom website for businesses based on their style preferences and business specifics.

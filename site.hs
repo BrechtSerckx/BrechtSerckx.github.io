@@ -1,11 +1,11 @@
 module Main where
 
 import           Data.List                      ( sortOn )
-import           Hakyll.Web.Template.Context.Path
-                                                ( metadataContext )
 import qualified Data.Yaml                     as Yaml
 import           Hakyll
 import           Hakyll.Web.Sass                ( sassCompiler )
+import           Hakyll.Web.Template.Context.Path
+                                                ( metadataContext )
 import           System.FilePath                ( (</>)
                                                 , addExtension
                                                 )
@@ -52,9 +52,10 @@ pageRuleWithSubdir :: Rules ()
 pageRuleWithSubdir = pageRuleWith $ \id' -> do
   let dataDir = fromGlob $ "data" </> toFilePath id' </> "*"
   items <- sortOn itemIdentifier <$> loadAll dataDir
-  pure $ listField "items" defaultContext (pure items)
+  pure $ \ctx -> listField "items" ctx (pure items)
 
-pageRuleWith :: (Identifier -> Compiler (Context String)) -> Rules ()
+pageRuleWith
+  :: (Identifier -> Compiler (Context String -> Context String)) -> Rules ()
 pageRuleWith mkExtraCtx = do
     -- Route to `<id>.html`
   route . customRoute $ \id' -> addExtension (toFilePath id') "html"
@@ -80,7 +81,7 @@ pageRuleWith mkExtraCtx = do
             routeTemplate
             (mkCtx $ \ctx ->
               bodyCtx
-                <> extraCtx
+                <> extraCtx (defaultBodyCtx <> metadataField <> ctx)
                 <> metadataContext (Just pageMetadata) ctx
                 <> metadataContext (Just settings)     ctx
                 <> defaultUrlCtx
