@@ -16,45 +16,45 @@
 
 <body>
     <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
-      <div class="container is-max-desktop">
-        <div class="navbar-brand">
-            <a class="navbar-item" href="/">
-                <span class="navbar-sitename is-3">
-                    $sitename$
-                </span>
-            </a>
-
-            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbar">
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-            </a>
-        </div>
-
-        <div id="navbar" class="navbar-menu">
-            <div class="navbar-end">
-                <a href="/" class="navbar-item">
-                    Home
-                </a>
-                <a href="/about.html" class="navbar-item">
-                    About Me
-                </a>
-                <a href="/professional.html" class="navbar-item">
-                    Professional
-                </a>
-                <a href="/projects.html" class="navbar-item">
-                    Projects
+        <div class="container is-max-desktop">
+            <div class="navbar-brand">
+                <a class="navbar-item" href="/">
+                    <span class="navbar-sitename is-4">
+                        $sitename$
+                    </span>
                 </a>
 
+                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbar">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
             </div>
-        </div>
+
+            <div id="navbar" class="navbar-menu">
+                <div class="navbar-end">
+                    <a href="/" class="navbar-item">
+                        Home
+                    </a>
+                    <a href="/about.html" class="navbar-item">
+                        About Me
+                    </a>
+                    <a href="/professional.html" class="navbar-item">
+                        Professional
+                    </a>
+                    <a href="/projects.html" class="navbar-item">
+                        Projects
+                    </a>
+
+                </div>
+            </div>
     </nav>
 
     <main role="main" class="section">
         <div class="container is-max-desktop">
-            <div class="block">
+            <div class="box">
                 $if(title)$
-                <h1 class="title is-1">$title$</h1>
+                <h1 class="title is-3">$title$</h1>
                 $endif$
                 $body$
             </div>
