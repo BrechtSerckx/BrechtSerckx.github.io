@@ -7,6 +7,12 @@ import           Hakyll.Web.Template.Context.Path
 import           System.FilePath                ( (</>)
                                                 , addExtension
                                                 )
+import           Hakyll.Web.Pandoc.Metadata     ( readMetadataValueWith )
+import           Text.Pandoc.Options            ( readerExtensions
+                                                , githubMarkdownExtensions
+                                                , ReaderOptions
+                                                , WriterOptions
+                                                )
 
 main :: IO ()
 main = hakyll siteRules
@@ -53,14 +59,20 @@ pageRuleWith mkExtraCtx = do
   -- `items` list.
   compile $ do
     id' <- getUnderlying
-    let routeFile =
-          fromFilePath $ "data" </> addExtension (toFilePath id') "md"
-        routeTemplate =
-          fromFilePath $ "templates" </> addExtension (toFilePath id') "html"
-        bodyCtx     = field "body" $ \_ -> loadBody routeFile
-        metadataCtx = metadataPathFrom pure routeFile
-        templateCtx = metadataPathFrom pure routeTemplate
-        settingsCtx = metadataPathFrom pure "data/default.md"
+    let
+      routeFile = fromFilePath $ "data" </> addExtension (toFilePath id') "md"
+      routeTemplate =
+        fromFilePath $ "templates" </> addExtension (toFilePath id') "html"
+      bodyCtx     = field "body" $ \_ -> loadBody routeFile
+      metadataCtx = metadataPathFrom
+        (readMetadataValueWith readerOptions writerOptions)
+        routeFile
+      templateCtx = metadataPathFrom
+        (readMetadataValueWith readerOptions writerOptions)
+        routeTemplate
+      settingsCtx = metadataPathFrom
+        (readMetadataValueWith readerOptions writerOptions)
+        "data/default.md"
     extraCtx <- mkExtraCtx id'
     makeItem ""
       >>= loadAndApplyTemplate
@@ -71,3 +83,13 @@ pageRuleWith mkExtraCtx = do
             "templates/default.html"
             (templateCtx <> metadataCtx <> settingsCtx <> defaultContext)
       >>= relativizeUrls
+
+bodyFieldFrom :: Identifier -> Context a
+bodyFieldFrom id' = field "body" $ \_ -> loadBody id'
+
+readerOptions :: ReaderOptions
+readerOptions =
+  defaultHakyllReaderOptions { readerExtensions = githubMarkdownExtensions }
+
+writerOptions :: WriterOptions
+writerOptions = defaultHakyllWriterOptions
