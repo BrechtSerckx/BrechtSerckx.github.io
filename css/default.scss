@@ -15,6 +15,11 @@ $title-color: $dark;
 $navbar-title-color: $light;
 // $footer-background-color: $light;
 
+// Use Fira Sans & Fira Code fonts
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code&family=Fira+Sans:ital,wght@0,400;0,600;1,400&display=swap');
+$family-sans-serif: "Fira Sans";
+$family-monospace: "Fira Code";
+
 // Import Bulma
 @import "../bulma/bulma.sass";
 
