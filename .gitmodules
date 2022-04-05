@@ -4,3 +4,6 @@
 [submodule "bulma-timeline"]
 	path = bulma-timeline
 	url = https://github.com/Wikiki/bulma-timeline.git
+[submodule "bulma-list"]
+	path = bulma-list
+	url = https://github.com/bluefantail/bulma-list.git
