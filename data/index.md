@@ -1,10 +1,8 @@
 ---
-title: Welcome to my website
 image: /images/me.jpg
+subtitle: Greetings, internet traveler.
 ---
 
-Greetings, internet traveler.  
-<br>
 It is an honor to welcome you on my humble website.  
 Please look around as long as you please.  
 <br>
