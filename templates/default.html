@@ -5,7 +5,11 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    $if(title)$
     <title>$sitename$ - $title$</title>
+    $else$
+    <title>$sitename$</title>
+    $endif$
     <link rel="stylesheet" href="/css/default.css" />
     <script defer="defer" src="/js/default.js" type="text/javascript"></script>
 </head>
@@ -46,7 +50,9 @@
 
     <main role="main" class="section">
         <div class="container">
+            $if(title)$
             <h1 class="title is-1">$title$</h1>
+            $endif$
             $body$
         </div>
     </main>

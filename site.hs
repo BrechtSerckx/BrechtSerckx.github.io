@@ -80,15 +80,21 @@ pageRuleWith mkExtraCtx = do
       settingsCtx = yamlMetadataPathFrom
         (readMetadataValueWith readerOptions writerOptions)
         "data/default.yaml"
+      defaultBodyCtx = bodyField "body"
+      defaultUrlCtx  = urlField "url"
     extraCtx <- mkExtraCtx id'
     makeItem ""
       >>= loadAndApplyTemplate
             routeTemplate
-            (bodyCtx <> extraCtx <> metadataCtx <> settingsCtx <> defaultContext
-            )
+            (bodyCtx <> extraCtx <> metadataCtx <> settingsCtx <> defaultUrlCtx)
       >>= loadAndApplyTemplate
             "templates/default.html"
-            (templateCtx <> metadataCtx <> settingsCtx <> defaultContext)
+            (  templateCtx
+            <> metadataCtx
+            <> settingsCtx
+            <> defaultBodyCtx
+            <> defaultUrlCtx
+            )
       >>= relativizeUrls
 
 readerOptions :: ReaderOptions

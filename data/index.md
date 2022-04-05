@@ -1,5 +1,4 @@
 ---
-title: brechtserckx.be
 subtitle: Welcome to my website
 image: /images/me.jpg
 ---
