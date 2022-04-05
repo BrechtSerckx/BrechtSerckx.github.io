@@ -30,3 +30,11 @@ $navbar-title-color: $light;
     @extend .subtitle;
     color: $navbar-background-color;
 }
+
+
+@media(max-width: $tablet) {
+    .reverse-columns {
+        flex-direction: column-reverse;
+        display: flex;
+    }
+}
