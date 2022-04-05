@@ -7,13 +7,16 @@
 <h2 class="title is-4">$curriculum$</h2>
 
 <div class="timeline">
-  $for(items)$
-  <div class="timeline-item is-info">
-    <div class="timeline-marker is-primary"></div>
-    <div class="timeline-content">
-      <p class="heading">$date$: $title$</p>
-      $body$
+    $for(items)$
+    <div class="timeline-item is-info">
+        <div class="timeline-marker is-primary"></div>
+        <div class="timeline-content">
+            <p class="title is-4">$date$: $title$</p>
+            $if(subtitle)$
+            <p class="subtitle is-6">$subtitle$</p>
+            $endif$
+            $body$
+        </div>
     </div>
-  </div>
-  $endfor$
+    $endfor$
 </div>
