@@ -33,19 +33,11 @@
 
             <div id="navbar" class="navbar-menu">
                 <div class="navbar-end">
-                    <a href="/" class="navbar-item">
-                        Home
+                    $for(navbar.items)$
+                    <a href="$link$" class="navbar-item">
+                        $title$
                     </a>
-                    <a href="/about.html" class="navbar-item">
-                        About Me
-                    </a>
-                    <a href="/professional.html" class="navbar-item">
-                        Professional
-                    </a>
-                    <a href="/projects.html" class="navbar-item">
-                        Projects
-                    </a>
-
+                    $endfor$
                 </div>
             </div>
     </nav>

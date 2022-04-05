@@ -1,4 +1,14 @@
 sitename: 'brechtserckx.be'
+navbar:
+  items:
+    - title: 'Home'
+      link: "/"
+    - title: 'About Me'
+      link: "/about.html"
+    - title: 'Professional'
+      link: "/professional.html"
+    - title: 'Projects'
+      link: "/projects.html"
 footer: 
   links:
     email:
