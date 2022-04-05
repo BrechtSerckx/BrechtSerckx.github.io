@@ -22,3 +22,13 @@ executable brechtserckx-be
       base == 4.*
     , hakyll == 4.13.*
     , filepath >= 1.4
+    , aeson >= 1.4
+    , unordered-containers >= 0.2
+    , vector >= 0.12
+    , parsec >= 3.1
+    , text >= 1.2
+  hs-source-dirs:
+    .
+    src
+  other-modules:
+    Data.Aeson.Path
