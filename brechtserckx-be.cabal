@@ -28,6 +28,7 @@ executable brechtserckx-be
     , parsec >= 3.1
     , text >= 1.2
     , pandoc >= 2.10
+    , hakyll-sass >= 0.2.4 && < 0.3
   hs-source-dirs:
     .
     src

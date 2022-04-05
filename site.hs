@@ -1,7 +1,8 @@
 module Main where
 
-import           Data.List                      ( sortOn )
 import           Hakyll
+import           Hakyll.Web.Sass                ( sassCompiler )
+import           Data.List                      ( sortOn )
 import           Hakyll.Web.Template.Context.Path
                                                 ( metadataPathFrom )
 import           System.FilePath                ( (</>)
@@ -29,9 +30,9 @@ siteRules = do
     route idRoute
     compile copyFileCompiler
 
-  match "css/*" $ do
-    route idRoute
-    compile compressCssCompiler
+  match "css/*.scss" $ do
+    route $ setExtension "css"
+    compile $ fmap compressCss <$> sassCompiler
 
   match "data/**.md" $ compile pandocCompiler
 
