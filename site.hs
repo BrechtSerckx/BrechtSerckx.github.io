@@ -29,6 +29,8 @@ siteRules = do
     route idRoute
     compile copyFileCompiler
 
+  match "images/**.svg" $ compile templateBodyCompiler
+
   match "js/*" $ do
     route idRoute
     compile copyFileCompiler
@@ -38,6 +40,7 @@ siteRules = do
     compile $ fmap compressCss <$> sassCompiler
 
   match "html/**.template.html" $ compile templateBodyCompiler
+
   match "html/**.page.*" $ do
       -- Route to `<id>.html`
     route

@@ -11,13 +11,13 @@ navbar:
       link: "/projects.html"
 footer: 
   links:
-    - icon: 'templates/footer/links/email.svg'
+    - icon: 'images/footer/links/email.svg'
       link: 'mailto:professional at brechtserckx dot be'
-    - icon: 'templates/footer/links/github.svg'
+    - icon: 'images/footer/links/github.svg'
       link: 'https://github.com/BrechtSerckx'
-    - icon: 'templates/footer/links/haskell.svg'
+    - icon: 'images/footer/links/haskell.svg'
       link: 'https://discourse.haskell.org/u/brechtserckx/summary'
-    - icon: 'templates/footer/links/linkedin.svg'
+    - icon: 'images/footer/links/linkedin.svg'
       link: 'https://www.linkedin.com/in/brecht-serckx-7b2760207/'
   iconsize: '32px'
   credits:
