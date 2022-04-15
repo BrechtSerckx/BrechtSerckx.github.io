@@ -6,7 +6,7 @@ import           Hakyll
 import           Control.Monad                  ( (>=>) )
 import           Hakyll.Web.Sass                ( sassCompiler )
 import           Hakyll.Web.Template.Context.Path
-                                                ( metadataContext )
+                                                ( metadataContext' )
 import qualified System.FilePath               as FP
 import           Text.Pandoc.Options            ( ReaderOptions
                                                 , WriterOptions
@@ -70,18 +70,18 @@ siteRules = do
       let
         pageCtx = mkCtx $ \ctx ->
           bodyField "body"
-            <> metadataContext (Just pageMetadata) ctx
-            <> fold (flip metadataContext ctx . Just . snd <$> templates)
-            <> metadataContext (Just settings) ctx
+            <> metadataContext' (Just pageMetadata) ctx
+            <> fold (flip metadataContext' ctx . Just . snd <$> templates)
+            <> metadataContext' (Just settings) ctx
         loadAndApplyWithMetadata [] = pure
         loadAndApplyWithMetadata ((templateId, templateMetadata) : rest) =
           let
             templateCtx = mkCtx $ \ctx ->
               bodyField "body"
-                <> metadataContext (Just pageMetadata)     ctx
-                <> metadataContext (Just templateMetadata) ctx
-                <> fold (flip metadataContext ctx . Just . snd <$> templates)
-                <> metadataContext (Just settings) ctx
+                <> metadataContext' (Just pageMetadata)     ctx
+                <> metadataContext' (Just templateMetadata) ctx
+                <> fold (flip metadataContext' ctx . Just . snd <$> templates)
+                <> metadataContext' (Just settings) ctx
           in  loadAndApplyTemplate templateId templateCtx
                 >=> loadAndApplyWithMetadata rest
       getResourceBody

@@ -3,11 +3,14 @@ module Hakyll.Web.Template.Context.Path
   , getMetadataPath
   , getMetadataPath'
   , metadataContext
+  , metadataContext'
+  , defaultParseContextField
   )
 where
 
 import qualified Data.Aeson                    as Aeson
 import           GHC.Exts                       ( toList )
+import           Data.Function                  ( fix )
 import           Data.Aeson                     ( (.=) )
 import           Data.Aeson.Path                ( lookupPath
                                                 , readPath'
@@ -58,8 +61,9 @@ getMetadataPath' :: Aeson.FromJSON a => Identifier -> String -> Compiler a
 getMetadataPath' identifier key =
   maybe (noResult "not found") pure =<< getMetadataPath identifier key
 
-metadataContext :: Maybe Aeson.Object -> Context String -> Context String
-metadataContext mI parentCtx = Context $ \k _ i -> do
+type ContextFieldParser = Yaml.Value -> Compiler (Maybe ContextField)
+metadataContext :: Maybe Aeson.Object -> ContextFieldParser -> Context String
+metadataContext mI parseContextField = Context $ \k _ i -> do
   let path                = readPath' $ "." <> k
       missingContextField = noResult $ "Missing field '" ++ k ++ "' in context"
       input               = case mI of
@@ -73,18 +77,28 @@ metadataContext mI parentCtx = Context $ \k _ i -> do
             ]
   case lookupPath path input of
     Left  _     -> missingContextField
-    Right value -> case value of
-      Aeson.String s -> pure $ StringField (Text.unpack s)
-      Aeson.Number n -> pure $ StringField (show n)
-      Aeson.Null     -> missingContextField
-      Aeson.Bool b   -> if b then pure EmptyField else missingContextField
-      Aeson.Array as ->
-        let c      = metadataContext Nothing parentCtx
-            mkItem = Item "" . BS8.unpack . Yaml.encode
-        in  pure $ ListField (c <> parentCtx) (mkItem <$> toList as)
-      Aeson.Object kvs ->
-        let c = metadataContext Nothing parentCtx
-            mkItem (k', v') =
-                Item "" . BS8.unpack . Yaml.encode $ Aeson.object
-                  ["key" .= k', "value" .= v']
-        in  pure $ ListField (c <> parentCtx) (mkItem <$> toList kvs)
+    Right value -> maybe missingContextField pure =<< parseContextField value
+
+defaultParseContextField
+  :: Context String
+  -> ContextFieldParser
+  -> Yaml.Value
+  -> Compiler (Maybe ContextField)
+defaultParseContextField parentCtx parseContextField = \case
+  Aeson.String s -> pure . Just $ StringField (Text.unpack s)
+  Aeson.Number n -> pure . Just $ StringField (show n)
+  Aeson.Null     -> pure Nothing
+  Aeson.Bool b   -> pure $ if b then Just EmptyField else Nothing
+  Aeson.Array as ->
+    let c      = metadataContext Nothing parseContextField
+        mkItem = Item "" . BS8.unpack . Yaml.encode
+    in  pure . Just $ ListField (c <> parentCtx) (mkItem <$> toList as)
+  Aeson.Object kvs ->
+    let c = metadataContext Nothing parseContextField
+        mkItem (k', v') = Item "" . BS8.unpack . Yaml.encode $ Aeson.object
+          ["key" .= k', "value" .= v']
+    in  pure . Just $ ListField (c <> parentCtx) (mkItem <$> toList kvs)
+
+metadataContext' :: Maybe Yaml.Object -> Context String -> Context String
+metadataContext' mI ctx =
+  metadataContext mI $ fix (defaultParseContextField ctx)
