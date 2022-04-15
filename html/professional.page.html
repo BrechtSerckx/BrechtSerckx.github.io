@@ -1,0 +1,67 @@
+---
+template: 'html/default.template.html'
+title: Professional
+curriculum: "Curriculum"
+iconsize: '64'
+icon: 'https://bulma.io/images/placeholders/64x64.png'
+text: |
+  I am a Haskell developer yada yada
+items:
+  - title: Master in Computer Science
+    subtitle: KU Leuven, Belgium
+    date: 2012 - 2019
+    icon: /images/kuleuven.png
+    text: |
+      I obtained my Bachelor's degree in Engineering Science at the KU Leuven university, with major Computer Science and minor Electrical Engineering.  
+      Subsequently, I obtained my Master's degree in Engineering: Computer Science with option Artificial Intelligence. 
+      I took special interest in courses regarding Programming Language Theory and Formal Systems.
+  - date: 2018 - 2019
+    title: Master's Thesis
+    subtitle: Under supervision of Prof. Dr. Ir. Tom Schrijvers
+    icon: /images/thesis.svg
+    text: |
+      _Eff_ is an experimental functional programming language that considers computational side effects as algebraic operations or effects and captures them with effect handlers.  
+      Eff is compiled to OCaml via the internal calculi _ImpEff_ and _ExEff_.
+      To make the compiled code run as fast as possible, optimizations were made to ExEff.  
+      This Master's thesis maps the optimizations in ExEff, adds some new optimizations, and proposes the preservation of type for the optimizations.
+      In addition, the Master's thesis attempts to evaluate the performance of the generated code compared to non-optimized code.
+  - date: 2019 - present
+    title: Backend Haskell Developer
+    subtitle: CentralApp, Brussels, Belgium
+    icon: '/images/centralapp.png'
+    text: |
+      CentralApp is a startup that takes care of the online presence local businesses.
+      We provide a platform that generates a custom website for businesses based on their style preferences and business specifics.
+      We make sure that their clients can find them online by improving SEO, and synchronizing the business data with service providers like Google and Facebook.
+
+      Our backend is a distributed system consisting of services written in Haskell and Scala. 
+      The Haskell services are built using Servant and Opaleye.
+      We make heavy use of AWS services for deployment, message queues and storage.
+      The Nix ecosystem is used for building and developing.
+
+      As the second backend developer, I am co-responsible for... _everything_.
+---
+<!-- small introduction text about this website -->
+<div class="block">
+    $text$
+</div>
+
+<!-- curriculum -->
+<h2 class="title is-4">$curriculum$</h2>
+
+<div class="timeline">
+    $for(items)$
+    <div class="timeline-item is-info">
+        <div class="timeline-marker is-image is-$iconsize$x$iconsize$">
+          <img src="$icon$" width="$iconsize$" height="$iconsize$"  >
+        </div>
+        <div class="timeline-content">
+            <p class="title is-4">$date$: $title$</p>
+            $if(subtitle)$
+            <p class="subtitle is-6"><i>$subtitle$</i></p>
+            $endif$
+            $text$
+        </div>
+    </div>
+    $endfor$
+</div>
