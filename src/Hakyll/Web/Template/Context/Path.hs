@@ -9,7 +9,6 @@ where
 import qualified Data.Aeson                    as Aeson
 import           GHC.Exts                       ( toList )
 import           Data.Aeson                     ( (.=) )
-import           Control.Exception              ( throw )
 import           Data.Aeson.Path                ( lookupPath
                                                 , readPath'
                                                 )
@@ -20,7 +19,9 @@ import           Hakyll.Core.Compiler           ( Compiler
                                                 , noResult
                                                 )
 import           Hakyll.Core.Item               ( Item(..) )
-import           Hakyll.Core.Identifier         ( Identifier )
+import           Hakyll.Core.Identifier         ( Identifier
+                                                , toFilePath
+                                                )
 import           Hakyll.Core.Metadata           ( getMetadata )
 import           Hakyll.Web.Template.Context    ( Context(..)
                                                 , ContextField(..)
@@ -61,10 +62,15 @@ metadataContext :: Maybe Aeson.Object -> Context String -> Context String
 metadataContext mI parentCtx = Context $ \k _ i -> do
   let path                = readPath' $ "." <> k
       missingContextField = noResult $ "Missing field '" ++ k ++ "' in context"
-      input               = maybe
-        (either throw id . Yaml.decodeEither' . BS8.pack $ itemBody i)
-        Aeson.Object
-        mI
+      input               = case mI of
+        Just i' -> Aeson.Object i'
+        Nothing -> case Yaml.decodeEither' . BS8.pack $ itemBody i of
+          Right i' -> i'
+          Left  e  -> error $ unlines
+            [ toFilePath (itemIdentifier i) <> ": " <> k
+            , Yaml.prettyPrintParseException e
+            , itemBody i
+            ]
   case lookupPath path input of
     Left  _     -> missingContextField
     Right value -> case value of
