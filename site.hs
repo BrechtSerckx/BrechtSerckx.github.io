@@ -1,12 +1,15 @@
 module Main where
 
 import qualified Data.Yaml                     as Yaml
+import           Data.Function                  ( fix )
 import           Data.Foldable                  ( fold )
 import           Hakyll
 import           Control.Monad                  ( (>=>) )
 import           Hakyll.Web.Sass                ( sassCompiler )
 import           Hakyll.Web.Template.Context.Path
-                                                ( metadataContext' )
+                                                ( mkMetadataContext
+                                                , defaultParseContextField
+                                                )
 import qualified System.FilePath               as FP
 import           Text.Pandoc.Options            ( ReaderOptions
                                                 , WriterOptions
@@ -70,18 +73,18 @@ siteRules = do
       let
         pageCtx = mkCtx $ \ctx ->
           bodyField "body"
-            <> metadataContext' (Just pageMetadata) ctx
-            <> fold (flip metadataContext' ctx . Just . snd <$> templates)
-            <> metadataContext' (Just settings) ctx
+            <> metadataContext (Just pageMetadata) ctx
+            <> fold (flip metadataContext ctx . Just . snd <$> templates)
+            <> metadataContext (Just settings) ctx
         loadAndApplyWithMetadata [] = pure
         loadAndApplyWithMetadata ((templateId, templateMetadata) : rest) =
           let
             templateCtx = mkCtx $ \ctx ->
               bodyField "body"
-                <> metadataContext' (Just pageMetadata)     ctx
-                <> metadataContext' (Just templateMetadata) ctx
-                <> fold (flip metadataContext' ctx . Just . snd <$> templates)
-                <> metadataContext' (Just settings) ctx
+                <> metadataContext (Just pageMetadata)     ctx
+                <> metadataContext (Just templateMetadata) ctx
+                <> fold (flip metadataContext ctx . Just . snd <$> templates)
+                <> metadataContext (Just settings) ctx
           in  loadAndApplyTemplate templateId templateCtx
                 >=> loadAndApplyWithMetadata rest
       getResourceBody
@@ -98,3 +101,10 @@ readerOptions =
 
 writerOptions :: WriterOptions
 writerOptions = defaultHakyllWriterOptions
+
+parseContextField
+  :: Context String -> Yaml.Value -> Compiler (Maybe ContextField)
+parseContextField parentCtx = fix (defaultParseContextField parentCtx)
+
+metadataContext :: Maybe Yaml.Object -> Context String -> Context String
+metadataContext mI ctx = mkMetadataContext mI $ parseContextField ctx
