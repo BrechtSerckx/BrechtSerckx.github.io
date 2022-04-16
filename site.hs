@@ -98,16 +98,3 @@ readerOptions =
 
 writerOptions :: WriterOptions
 writerOptions = defaultHakyllWriterOptions
-
--- | Map any field to its metadata value, if present
-metadataFieldFrom :: Identifier -> Context a
-metadataFieldFrom id' = Context $ \k _ _ -> do
-  let empty' =
-        noResult
-          $  "No '"
-          ++ k
-          ++ "' field in metadata "
-          ++ "of item "
-          ++ show id'
-  value <- getMetadataField id' k
-  maybe empty' (return . StringField) value
