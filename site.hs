@@ -2,9 +2,13 @@ module Main where
 
 import qualified Data.Yaml                     as Yaml
 import           Data.Function                  ( fix )
-import           Data.Foldable                  ( fold )
+import qualified Data.Aeson.Types              as Aeson
+import           Data.Foldable                  ( fold
+                                                , asum
+                                                )
 import           Hakyll
 import           Control.Monad                  ( (>=>) )
+import           Hakyll.Web.Pandoc.Metadata
 import           Hakyll.Web.Sass                ( sassCompiler )
 import           Hakyll.Web.Template.Context.Path
                                                 ( mkMetadataContext
@@ -102,9 +106,10 @@ readerOptions =
 writerOptions :: WriterOptions
 writerOptions = defaultHakyllWriterOptions
 
-parseContextField
-  :: Context String -> Yaml.Value -> Compiler (Maybe ContextField)
-parseContextField parentCtx = fix (defaultParseContextField parentCtx)
-
 metadataContext :: Maybe Yaml.Object -> Context String -> Context String
-metadataContext mI ctx = mkMetadataContext mI $ parseContextField ctx
+metadataContext mI ctx = mkMetadataContext mI . fix $ \f v ->
+  let pandocParseContextField = case Aeson.fromJSON v of
+        Aeson.Error   _  -> pure Nothing
+        Aeson.Success mv -> Just <$> readMetadataValue mv
+  in  asum
+        <$> sequence [pandocParseContextField, defaultParseContextField ctx f v]
