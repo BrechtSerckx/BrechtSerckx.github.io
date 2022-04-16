@@ -2,7 +2,8 @@ module Hakyll.Web.Pandoc.Metadata
   ( readMetadataValue
   , readMetadataValueWith
   , MetadataValue(..)
-  ) where
+  )
+where
 
 import           Control.Applicative            ( (<|>) )
 import           Data.Aeson                     ( (.:)
@@ -43,4 +44,4 @@ readMetadataValueWith readerOptions writerOptions = \case
   PandocMetadata ext s -> StringField . itemBody <$> renderPandocWith
     readerOptions
     writerOptions
-    Item { itemIdentifier = fromFilePath $ "test" <> ext, itemBody = s }
+    Item { itemIdentifier = fromFilePath $ "test." <> ext, itemBody = s }
