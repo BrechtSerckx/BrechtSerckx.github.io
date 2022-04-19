@@ -4,8 +4,6 @@ title: Professional
 curriculum: "Curriculum"
 iconsize: '64'
 icon: 'https://bulma.io/images/placeholders/64x64.png'
-text: |
-  I am a Haskell developer yada yada
 items:
   - title: Master in Computer Science
     subtitle: KU Leuven, Belgium
@@ -48,9 +46,11 @@ items:
         As the second backend developer, I am co-responsible for... _everything_.
 ---
 <!-- small introduction text about this website -->
+$if(text)$
 <div class="block">
     $text$
 </div>
+$endif$
 
 <!-- curriculum -->
 <h2 class="title is-4">$curriculum$</h2>
