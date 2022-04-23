@@ -30,6 +30,53 @@ content:
       text: 'professional@brechtserckx.be'
     - icon: 'D'
       text: 'www.brechtserckx.be'
+  ee:
+    title: 'Education & Experience'
+    items:
+    - title: 'Bachelor of Engineering Science'
+      subtitle: '2012 - 2018'
+      items:
+      - KU Leuven
+      - Major: Computer Science
+      - Minor: Electrical Engineering
+    - title: 'Master of Engineering: Computer Science'
+      subtitle: '2016 - 2019'
+      items:
+      - <i>KU Leuven</i>
+      - Option: Artificial Intelligence
+      - Thesis: Optimizations in the Eff Compiler
+    - title: 'Backend Haskell Developer'
+      subtitle: '2019 - Present'
+      items:
+      - <i>CentralApp</i>
+      - Web platform to take care of local businesses' website and online presence
+      - Backend: distributed system in Haskell (and Scala)
+      - AWS, PostgreSQL, NixOS, Servant, Opaleye
+  tech:
+    title: 'Technologies'
+    columns:
+    - items:
+      - name: 'Haskell'
+        level: 'advanced'
+      - name: 'Nix'
+        level: 'advanced'
+      - name: 'Bash'
+        level: 'advanced'
+      - name: 'Linux'
+        level: 'advanced'
+      - name: 'Git'
+        level: 'advanced'
+    - items:
+      - name: 'GitHub Acts'
+        level: 'intermediate'
+      - name: 'Docker'
+        level: 'intermediate'
+      - name: 'Python'
+        level: 'intermediate'
+      - name: 'SQL'
+        level: 'intermediate'
+      - name: 'AWS'
+        level: 'basic'
 ---
 <!doctype html>
 <html lang="en">
@@ -77,46 +124,77 @@ content:
                     </div>
                 </div>
                 <div class="tile is-child">
-                  <h1 class="title is-4">
-                    $content.languages.title$
-                  </h1>
-                  <div class="content">
-                    <ul style="list-style: outside '> ';">
-                      <table>
-                      $for(content.languages.items)$
-                        <tr>
-                          <td>$language$</td>
-                          <td>$level$</td>
-                        </tr>
-                      $endfor$
-                      </table>
-                    </ul>
-                  </div>
+                    <h1 class="title is-4">
+                        $content.languages.title$
+                    </h1>
+                    <div class="content">
+                        <table>
+                            $for(content.languages.items)$
+                            <tr>
+                                <td>$language$</td>
+                                <td>$level$</td>
+                            </tr>
+                            $endfor$
+                        </table>
+                    </div>
                 </div>
                 <div class="tile is-child">
-                  <h1 class="title is-4">
-                    $content.contact.title$
-                  </h1>
-                  <div class="content">
-                    <ul style="list-style: outside '> ';">
-                      <table>
-                        $for(content.contact.items)$
-                        <tr>
-                          <td>$icon$</td>
-                          <td>$text$</td>
-                        </tr>
-                        $endfor$
-                      </table>
-                    </ul>
-                  </div>
+                    <h1 class="title is-4">
+                        $content.contact.title$
+                    </h1>
+                    <div class="content">
+                        <ul style="list-style: outside '> ';">
+                            <table>
+                                $for(content.contact.items)$
+                                <tr>
+                                    <td>$icon$</td>
+                                    <td>$text$</td>
+                                </tr>
+                                $endfor$
+                            </table>
+                        </ul>
+                    </div>
                 </div>
             </div>
             <div class="tile is-7 is-vertical">
                 <div class="tile is-child">
-                    BAR
+                    <h1 class="title is-4">
+                        $content.ee.title$
+                    </h1>
+                    $for(content.ee.items)$
+                    <h1 class="title is-5">
+                        $title$
+                    </h1>
+                    <h1 class="subtitle is-6">
+                        $subtitle$
+                    </h1>
+                    <div class="content">
+                        <ul style="list-style: outside '> ';">
+                            $for(items)$
+                            <li>$body$</li>
+                            $endfor$
+                        </ul>
+                    </div>
+                    $endfor$
                 </div>
                 <div class="tile is-child">
-                    BAR
+                    <h1 class="title is-4">
+                        $content.tech.title$
+                    </h1>
+                    <div class="columns">
+                        $for(content.tech.columns)$
+                        <div class="column content">
+                            <table>
+                                $for(items)$
+                                <tr>
+                                    <td>$name$</td>
+                                    <td>$level$</td>
+                                </tr>
+                                $endfor$
+                            </table>
+                        </div>
+                        $endfor$
+                    </div>
                 </div>
             </div>
         </div>
