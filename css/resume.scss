@@ -79,6 +79,14 @@ html {
 // custom ul bullets
 .content ul {
     list-style-type: '> ';
+    list-style-position: outside;
+    margin-left: 1em;
+    margin-top: 1em;
+}
+
+.content table td {
+    padding: 0em 0.5em;
+    border: none;
 }
 
 .tile.is-ancestor  {
@@ -95,3 +103,17 @@ html {
 }
 @include tile-background(white, $white);
 @include tile-background(grey-lighter, $grey-lighter);
+
+.tile h1.title.is-4 {
+    display: table;
+    position: relative;
+}
+.tile h1.title.is-4:after {
+    content: '';
+    width: 60px;
+    height: 4px;
+    background: gray;
+    position: absolute;
+    bottom: -1rem;
+    display: block;
+}
