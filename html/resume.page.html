@@ -1,0 +1,127 @@
+---
+title: 'Brecht Serckx'
+subtitle: 'Software Engineer'
+content:
+  interests:
+    title: 'Interests'
+    items:
+    - Haskell
+    - Software design with functional programming
+    - Automation of mundane tasks
+    - Cats
+    - Growing potatoes
+  languages:
+    title: 'Languages'
+    items:
+    - language: 'Dutch'
+      level: 'Native'
+    - language: 'English'
+      level: 'Advanced'
+    - language: 'French'
+      level: 'Basic'
+  contact:
+    title: 'Contact'
+    items:
+    - icon: 'A'
+      text: 'A. Vesaliusstraat 73c-0002, 3000 Leuven, Belgium'
+    - icon: 'B'
+      text: '+32 (0) 499 72 02 54'
+    - icon: 'C'
+      text: 'professional@brechtserckx.be'
+    - icon: 'D'
+      text: 'www.brechtserckx.be'
+---
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    $if(title)$
+    <title>$sitename$ - $title$</title>
+    $else$
+    <title>$sitename$</title>
+    $endif$
+    <link rel="stylesheet" href="/css/resume.css" />
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <script defer="defer" src="/js/default.js" type="text/javascript"></script>
+</head>
+
+<body>
+
+    <section class="hero is-primary">
+        <div class="hero-body">
+            <p class="title" style="text-transform: uppercase;">
+                $title$
+            </p>
+            <p class="subtitle" style="text-transform: uppercase;">
+                $subtitle$
+            </p>
+        </div>
+    </section>
+
+    <main role="main" class="section">
+        <div class="tile is-ancestor">
+            <div class="tile is-5 is-vertical">
+                <div class="tile is-child">
+                    <h1 class="title is-4">
+                        $content.interests.title$
+                    </h1>
+                    <div class="content">
+                        <ul style="list-style: outside '> ';">
+                            $for(content.interests.items)$
+                            <li>$body$</li>
+                            $endfor$
+                        </ul>
+                    </div>
+                </div>
+                <div class="tile is-child">
+                  <h1 class="title is-4">
+                    $content.languages.title$
+                  </h1>
+                  <div class="content">
+                    <ul style="list-style: outside '> ';">
+                      <table>
+                      $for(content.languages.items)$
+                        <tr>
+                          <td>$language$</td>
+                          <td>$level$</td>
+                        </tr>
+                      $endfor$
+                      </table>
+                    </ul>
+                  </div>
+                </div>
+                <div class="tile is-child">
+                  <h1 class="title is-4">
+                    $content.contact.title$
+                  </h1>
+                  <div class="content">
+                    <ul style="list-style: outside '> ';">
+                      <table>
+                        $for(content.contact.items)$
+                        <tr>
+                          <td>$icon$</td>
+                          <td>$text$</td>
+                        </tr>
+                        $endfor$
+                      </table>
+                    </ul>
+                  </div>
+                </div>
+            </div>
+            <div class="tile is-7 is-vertical">
+                <div class="tile is-child">
+                    BAR
+                </div>
+                <div class="tile is-child">
+                    BAR
+                </div>
+            </div>
+        </div>
+    </main>
+
+</body>
+
+</html>
