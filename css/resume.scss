@@ -100,10 +100,15 @@ html {
     @extend .is-italic;
 }
 
-#resume-pdf {
+body {
     height: 1122px; // 297 mm;
+    overflow: hidden;
+}
+
+#resume-pdf {
     display: flex;
     flex-flow: column;
+    height: inherit;
 }
 .resume-section {
     @extend .section;
