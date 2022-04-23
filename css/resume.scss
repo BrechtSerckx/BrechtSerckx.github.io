@@ -24,54 +24,9 @@ $footer-padding: 3rem 1.5rem 3rem;
 $family-sans-serif: "Fira Sans";
 $family-monospace: "Fira Code";
 
-$notification-radius: 0px;
 
 // Import Bulma
 @import "../bulma/bulma.sass";
-
-// $timeline-icon-size: $size-6;
-$timeline-content-padding: 1em 0 0 3em;
-
-// Import Bulma-timeline
-@import "../bulma-timeline/dist/css/bulma-timeline.sass";
-
-// Import Bulma-list
-@import "../bulma-list/sass/bulma-list.sass";
-
-
-// sitename is a subtitle with normal navbar color
-.navbar-sitename {
-    @extend .subtitle;
-    color: $navbar-background-color;
-}
-
-
-@media(max-width: $tablet) {
-    .reverse-columns {
-        flex-direction: column-reverse;
-        display: flex;
-    }
-}
-
-.has-rounded-corners {
-    border-radius: 5%;
-}
-
-.is-link-icon {
-    fill: $primary;
-}
-
-// sticky footer/navbar
-// see https://philipwalton.github.io/solved-by-flexbox/demos/sticky-footer/
-body {
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
-}
-body > main {
-    flex: 1;
-}
-
 // hide vertical scrollbar when not necessary
 html {
     overflow-y: auto;
