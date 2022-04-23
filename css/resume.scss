@@ -45,21 +45,6 @@ html {
     border: none;
 }
 
-.tile.is-ancestor  {
-    margin-bottom: 0px !important;
-}
-.tile.is-parent.is-vertical {
-    padding: 2em 1.5em;
-}
-
-@mixin tile-background($name, $color) {
-    .tile.is-#{$name} {
-        background-color: #{$color};
-    }
-}
-@include tile-background(white, $white);
-@include tile-background(grey-lighter, $grey-lighter);
-
 .resume-section-title {
     display: table;
     position: relative;
@@ -80,6 +65,11 @@ html {
     @extend .is-uppercase;
     @extend .has-text-weight-bold;
     @extend .is-family-monospace;
+}
+
+.hero-body {
+    padding-left: 0;
+    padding-right: 0;
 }
 
 .resume-subtitle {
@@ -109,6 +99,65 @@ html {
     @extend .is-6;
     @extend .is-italic;
 }
+
+body {
+    height: 297mm; // 1122.52px
+    display: flex;
+    flex-flow: column;
+}
+.resume-section {
+    @extend .section;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    flex: 1 1 auto;
+    /* background-color: $grey; */
+}
+
+.resume-container {
+    @extend .container;
+    @extend .is-max-desktop;
+    /* background-color: $light; */
+    height: 100%;
+}
+.resume-columns {
+    @extend .columns;
+    height: inherit;
+    margin: 0px;
+}
+.resume-column {
+    @extend .column;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    display: flex;
+    flex-flow: column;
+    gap: 1rem;
+}
+.resume-column:first-child {
+    padding-left: 3rem;
+}
+.resume-column:last-child {
+    padding-right: 3rem;
+}
+.resume-item {
+    flex: 1 1 auto;
+}
+
+@mixin resume-background($name, $color) {
+    .resume-column.is-#{$name} {
+        background-color: #{$color};
+    }
+}
+@include resume-background(primary, $primary);
+@include resume-background(warning, $warning);
+@include resume-background(green, $green);
+@include resume-background(red, $red);
+@include resume-background(white, $white);
+@include resume-background(grey-lighter, $grey-lighter);
+
 
 @media print {
     .ribbon {
