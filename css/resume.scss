@@ -19,7 +19,8 @@ $border: $primary;
 $footer-padding: 3rem 1.5rem 3rem;
 
 // Use Fira Sans & Fira Code fonts
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code&family=Fira+Sans:ital,wght@0,400;0,600;1,400&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Fira+Code&family=Fira+Sans:ital,wght@0,400;0,600;1,400&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600&display=swap');
 $family-sans-serif: "Fira Sans";
 $family-monospace: "Fira Code";
 
@@ -104,11 +105,11 @@ html {
 @include tile-background(white, $white);
 @include tile-background(grey-lighter, $grey-lighter);
 
-.tile h1.title.is-4 {
+.resume-section-title {
     display: table;
     position: relative;
 }
-.tile h1.title.is-4:after {
+.resume-section-title:after {
     content: '';
     width: 60px;
     height: 4px;
@@ -116,4 +117,40 @@ html {
     position: absolute;
     bottom: -1rem;
     display: block;
+}
+
+.resume-title {
+    @extend .title;
+    @extend .is-1;
+    @extend .is-uppercase;
+    @extend .has-text-weight-bold;
+    @extend .is-family-monospace;
+}
+
+.resume-subtitle {
+    @extend .subtitle;
+    @extend .is-3;
+    @extend .is-uppercase;
+    @extend .has-text-weight-normal;
+    @extend .is-family-monospace;
+}
+
+.resume-section-title {
+    @extend .title;
+    @extend .is-uppercase;
+    @extend .is-4;
+    @extend .has-text-weight-normal;
+}
+
+.resume-subsection-title {
+    @extend .title;
+    @extend .is-5;
+    @extend .has-text-weight-bold;
+    @extend .is-family-monospace;
+}
+
+.resume-subsection-subtitle {
+    @extend .subtitle;
+    @extend .is-6;
+    @extend .is-italic;
 }

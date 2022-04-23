@@ -34,21 +34,18 @@ content:
     title: 'Education & Experience'
     items:
     - title: 'Bachelor of Engineering Science'
-      subtitle: '2012 - 2018'
+      subtitle: '2012 - 2018 | KU Leuven'
       items:
-      - KU Leuven
       - Major: Computer Science
       - Minor: Electrical Engineering
     - title: 'Master of Engineering: Computer Science'
-      subtitle: '2016 - 2019'
+      subtitle: '2016 - 2019 | KU Leuven'
       items:
-      - <i>KU Leuven</i>
       - Option: Artificial Intelligence
       - Thesis: Optimizations in the Eff Compiler
     - title: 'Backend Haskell Developer'
-      subtitle: '2019 - Present'
+      subtitle: '2019 - Present | CentralApp'
       items:
-      - <i>CentralApp</i>
       - Web platform to take care of local businesses' website and online presence
       - Backend: distributed system in Haskell (and Scala)
       - AWS, PostgreSQL, NixOS, Servant, Opaleye
@@ -106,12 +103,12 @@ content:
                     </figure>
                 </div>
                 <div class="column is-9">
-                    <h1 class="title is-uppercase">
+                    <p class="resume-title">
                         $title$
-                    </h1>
-                    <h2 class="subtitle is-uppercase">
+                    </p>
+                    <p class="resume-subtitle">
                         $subtitle$
-                    </h2>
+                    </p>
                 </div>
             </div>
         </div>
@@ -120,9 +117,9 @@ content:
     <div class="tile is-ancestor">
         <div class="tile is-parent is-5 is-vertical is-white">
             <div class="tile is-child block">
-                <h1 class="title is-4">
+                <p class="resume-section-title">
                     $content.interests.title$
-                </h1>
+                </p>
                 <div class="content">
                     <ul>
                         $for(content.interests.items)$
@@ -132,9 +129,9 @@ content:
                 </div>
             </div>
             <div class="tile is-child block">
-                <h1 class="title is-4">
+                <p class="resume-section-title">
                     $content.languages.title$
-                </h1>
+                </p>
                 <div class="content">
                     <table>
                         $for(content.languages.items)$
@@ -147,9 +144,9 @@ content:
                 </div>
             </div>
             <div class="tile is-child block">
-                <h1 class="title is-4">
+                <p class="resume-section-title">
                     $content.contact.title$
-                </h1>
+                </p>
                 <div class="content">
                     <ul>
                         <table>
@@ -166,16 +163,16 @@ content:
         </div>
         <div class="tile is-parent is-7 is-vertical is-grey-lighter">
             <div class="tile is-child block">
-                <h1 class="title is-4">
+                <p class="resume-section-title">
                     $content.ee.title$
-                </h1>
+                </p>
                 $for(content.ee.items)$
-                <h1 class="title is-5">
+                <p class="resume-subsection-title">
                     $title$
-                </h1>
-                <h1 class="subtitle is-6">
+                </p>
+                <p class="resume-subsection-subtitle">
                     $subtitle$
-                </h1>
+                </p>
                 <div class="content">
                     <ul>
                         $for(items)$
@@ -186,9 +183,9 @@ content:
                 $endfor$
             </div>
             <div class="tile is-child block">
-                <h1 class="title is-4">
+                <p class="resume-section-title">
                     $content.tech.title$
-                </h1>
+                </p>
                 <div class="columns">
                     $for(content.tech.columns)$
                     <div class="column content">
