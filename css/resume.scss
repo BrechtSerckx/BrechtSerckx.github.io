@@ -154,3 +154,37 @@ html {
     @extend .is-6;
     @extend .is-italic;
 }
+
+@media print {
+    .ribbon {
+        visibility: hidden;
+        height: 0px;
+    }
+}
+@media not print {
+    .ribbon {
+        background-color: $white;
+        overflow: hidden;
+        white-space: nowrap;
+        /* top right corner */
+        position: absolute;
+        right: -65px;
+        top: 50px;
+        width: 300px;
+        height: 60;
+        /* for 45 deg rotation */
+        -webkit-transform: rotate(45deg);
+        -moz-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        -o-transform: rotate(45deg);
+        transform: rotate(45deg);
+    }
+    .ribbon a {
+        border: 1px solid $primary;
+        color: $black;
+        display: block;
+        margin: 1px 0;
+        padding: 10px 50px;
+        text-align: center;
+    }
+}
