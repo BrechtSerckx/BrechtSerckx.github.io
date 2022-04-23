@@ -22,6 +22,8 @@ $footer-padding: 3rem 1.5rem 3rem;
 $family-sans-serif: "Fira Sans";
 $family-monospace: "Fira Code";
 
+$notification-radius: 0px;
+
 // Import Bulma
 @import "../bulma/bulma.sass";
 
@@ -77,3 +79,18 @@ html {
 .content ul {
     list-style-type: '> ';
 }
+
+.tile.is-ancestor  {
+    margin-bottom: 0px !important;
+}
+.tile.is-parent.is-vertical:first-child {
+    padding: 1rem 1.5rem;
+}
+
+@mixin tile-background($name, $color) {
+    .tile.is-#{$name} {
+        background-color: #{$color};
+    }
+}
+@include tile-background(white, $white);
+@include tile-background(grey-lighter, $grey-lighter);

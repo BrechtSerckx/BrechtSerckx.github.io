@@ -108,97 +108,95 @@ content:
         </div>
     </section>
 
-    <main role="main" class="section">
-        <div class="tile is-ancestor">
-            <div class="tile is-5 is-vertical">
-                <div class="tile is-child">
-                    <h1 class="title is-4">
-                        $content.interests.title$
-                    </h1>
-                    <div class="content">
-                        <ul>
-                            $for(content.interests.items)$
-                            <li>$body$</li>
-                            $endfor$
-                        </ul>
-                    </div>
+    <div class="tile is-ancestor">
+        <div class="tile is-parent is-5 is-vertical is-white">
+            <div class="tile is-child block">
+                <h1 class="title is-4">
+                    $content.interests.title$
+                </h1>
+                <div class="content">
+                    <ul>
+                        $for(content.interests.items)$
+                        <li>$body$</li>
+                        $endfor$
+                    </ul>
                 </div>
-                <div class="tile is-child">
-                    <h1 class="title is-4">
-                        $content.languages.title$
-                    </h1>
-                    <div class="content">
+            </div>
+            <div class="tile is-child block">
+                <h1 class="title is-4">
+                    $content.languages.title$
+                </h1>
+                <div class="content">
+                    <table>
+                        $for(content.languages.items)$
+                        <tr>
+                            <td>$language$</td>
+                            <td>$level$</td>
+                        </tr>
+                        $endfor$
+                    </table>
+                </div>
+            </div>
+            <div class="tile is-child block">
+                <h1 class="title is-4">
+                    $content.contact.title$
+                </h1>
+                <div class="content">
+                    <ul>
                         <table>
-                            $for(content.languages.items)$
+                            $for(content.contact.items)$
                             <tr>
-                                <td>$language$</td>
+                                <td>$icon$</td>
+                                <td>$text$</td>
+                            </tr>
+                            $endfor$
+                        </table>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="tile is-parent is-7 is-vertical is-grey-lighter">
+            <div class="tile is-child block">
+                <h1 class="title is-4">
+                    $content.ee.title$
+                </h1>
+                $for(content.ee.items)$
+                <h1 class="title is-5">
+                    $title$
+                </h1>
+                <h1 class="subtitle is-6">
+                    $subtitle$
+                </h1>
+                <div class="content">
+                    <ul>
+                        $for(items)$
+                        <li>$body$</li>
+                        $endfor$
+                    </ul>
+                </div>
+                $endfor$
+            </div>
+            <div class="tile is-child block">
+                <h1 class="title is-4">
+                    $content.tech.title$
+                </h1>
+                <div class="columns">
+                    $for(content.tech.columns)$
+                    <div class="column content">
+                        <table>
+                            $for(items)$
+                            <tr>
+                                <td>$name$</td>
                                 <td>$level$</td>
                             </tr>
                             $endfor$
                         </table>
                     </div>
-                </div>
-                <div class="tile is-child">
-                    <h1 class="title is-4">
-                        $content.contact.title$
-                    </h1>
-                    <div class="content">
-                        <ul>
-                            <table>
-                                $for(content.contact.items)$
-                                <tr>
-                                    <td>$icon$</td>
-                                    <td>$text$</td>
-                                </tr>
-                                $endfor$
-                            </table>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="tile is-7 is-vertical">
-                <div class="tile is-child">
-                    <h1 class="title is-4">
-                        $content.ee.title$
-                    </h1>
-                    $for(content.ee.items)$
-                    <h1 class="title is-5">
-                        $title$
-                    </h1>
-                    <h1 class="subtitle is-6">
-                        $subtitle$
-                    </h1>
-                    <div class="content">
-                        <ul>
-                            $for(items)$
-                            <li>$body$</li>
-                            $endfor$
-                        </ul>
-                    </div>
                     $endfor$
-                </div>
-                <div class="tile is-child">
-                    <h1 class="title is-4">
-                        $content.tech.title$
-                    </h1>
-                    <div class="columns">
-                        $for(content.tech.columns)$
-                        <div class="column content">
-                            <table>
-                                $for(items)$
-                                <tr>
-                                    <td>$name$</td>
-                                    <td>$level$</td>
-                                </tr>
-                                $endfor$
-                            </table>
-                        </div>
-                        $endfor$
-                    </div>
                 </div>
             </div>
         </div>
-    </main>
+    </div>
 
 </body>
 
