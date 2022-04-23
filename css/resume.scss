@@ -72,3 +72,8 @@ body > main {
 html {
     overflow-y: auto;
 }
+
+// custom ul bullets
+.content ul {
+    list-style-type: '> ';
+}
