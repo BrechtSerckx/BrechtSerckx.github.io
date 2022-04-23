@@ -22,13 +22,13 @@ content:
   contact:
     title: 'Contact'
     items:
-    - icon: 'A'
-      text: 'A. Vesaliusstraat 73c-0002, 3000 Leuven, Belgium'
-    - icon: 'B'
+    - icon: 'location'
+      text: 'Andreas Vesaliusstraat 73c-0002, 3000 Leuven, Belgium'
+    - icon: 'call'
       text: '+32 (0) 499 72 02 54'
-    - icon: 'C'
+    - icon: 'mail'
       text: 'professional@brechtserckx.be'
-    - icon: 'D'
+    - icon: 'link'
       text: 'www.brechtserckx.be'
   ee:
     title: 'Education & Experience'
@@ -97,7 +97,7 @@ content:
     <section class="hero is-primary">
         <div class="hero-body">
             <div class="columns">
-                <div class="column is-3" >
+                <div class="column is-3">
                     <figure class="image is-128x128">
                         <img class="is-rounded" src="images/about.jpg">
                     </figure>
@@ -151,7 +151,11 @@ content:
                     <table>
                         $for(content.contact.items)$
                         <tr>
-                            <td>$icon$</td>
+                            <td>
+                                <span class="icon">
+                                    <ion-icon name="$icon$-outline"></ion-icon>
+                                </span>
+                            </td>
                             <td>$text$</td>
                         </tr>
                         $endfor$
@@ -201,6 +205,8 @@ content:
             </div>
         </div>
     </div>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
 </body>
 
