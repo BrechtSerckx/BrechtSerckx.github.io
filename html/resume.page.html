@@ -123,91 +123,21 @@ content:
     <div class="tile is-ancestor">
         <div class="tile is-parent is-5 is-vertical is-white">
             <div class="tile is-child block">
-                <p class="resume-section-title">
-                    $content.interests.title$
-                </p>
-                <div class="content">
-                    <ul>
-                        $for(content.interests.items)$
-                        <li>$body$</li>
-                        $endfor$
-                    </ul>
-                </div>
+              $partial("html/resume/interests.template.html")$
             </div>
             <div class="tile is-child block">
-                <p class="resume-section-title">
-                    $content.languages.title$
-                </p>
-                <div class="content">
-                    <table>
-                        $for(content.languages.items)$
-                        <tr>
-                            <td>$language$</td>
-                            <td>$level$</td>
-                        </tr>
-                        $endfor$
-                    </table>
-                </div>
+              $partial("html/resume/languages.template.html")$
             </div>
             <div class="tile is-child block">
-                <p class="resume-section-title">
-                    $content.contact.title$
-                </p>
-                <div class="content">
-                    <table>
-                        $for(content.contact.items)$
-                        <tr>
-                            <td>
-                                <span class="icon">
-                                    <ion-icon name="$icon$-outline"></ion-icon>
-                                </span>
-                            </td>
-                            <td>$text$</td>
-                        </tr>
-                        $endfor$
-                    </table>
-                </div>
+              $partial("html/resume/contact.template.html")$
             </div>
         </div>
         <div class="tile is-parent is-7 is-vertical is-grey-lighter">
             <div class="tile is-child block">
-                <p class="resume-section-title">
-                    $content.ee.title$
-                </p>
-                $for(content.ee.items)$
-                <p class="resume-subsection-title">
-                    $title$
-                </p>
-                <p class="resume-subsection-subtitle">
-                    $subtitle$
-                </p>
-                <div class="content">
-                    <ul>
-                        $for(items)$
-                        <li>$body$</li>
-                        $endfor$
-                    </ul>
-                </div>
-                $endfor$
+              $partial("html/resume/ee.template.html")$
             </div>
             <div class="tile is-child block">
-                <p class="resume-section-title">
-                    $content.tech.title$
-                </p>
-                <div class="columns">
-                    $for(content.tech.columns)$
-                    <div class="column content">
-                        <table>
-                            $for(items)$
-                            <tr>
-                                <td>$name$</td>
-                                <td>$level$</td>
-                            </tr>
-                            $endfor$
-                        </table>
-                    </div>
-                    $endfor$
-                </div>
+              $partial("html/resume/tech.template.html")$
             </div>
         </div>
     </div>
