@@ -76,6 +76,19 @@ content:
         level: 'intermediate'
       - name: 'AWS'
         level: 'basic'
+print_explanation:
+  pandoc: md
+  value: |
+    This webpage is designed to be printed out!  
+    <br />
+    For best results, use the `Save to PDF` functionality with the following options:
+
+    - Orientation: `Portrait`
+    - Paper size: `A4`
+    - Margins: `None`
+    - Print background graphics: `Yes`
+
+    \* Supported on Firefox and Google Chrome.  
 ---
 <!doctype html>
 <html lang="en">
@@ -160,7 +173,9 @@ content:
                     <button class="delete" aria-label="close"></button>
                 </header>
                 <section class="modal-card-body">
-                    <!-- Content ... -->
+                    <div class="content">
+                        $print_explanation$
+                    </div>
                 </section>
                 <footer class="modal-card-foot">
                     <button class="button is-success" aria-label="print" onclick=window.print()">Print me!</button>
