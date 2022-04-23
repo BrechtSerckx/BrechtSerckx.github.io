@@ -169,6 +169,9 @@ body {
         visibility: hidden;
         height: 0px;
     }
+    .modal {
+        visibility: hidden;
+    }
 }
 @media not print {
     .ribbon {
