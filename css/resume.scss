@@ -100,7 +100,7 @@ html {
     @extend .is-italic;
 }
 
-body {
+#resume-pdf {
     height: 297mm; // 1122.52px
     display: flex;
     flex-flow: column;

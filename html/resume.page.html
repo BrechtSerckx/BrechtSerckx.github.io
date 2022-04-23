@@ -93,59 +93,66 @@ content:
     <link rel="stylesheet" href="/css/resume.css" />
     <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
     <script defer="defer" src="/js/default.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        function printPdf() {
+            window.print();
+        }
+    </script>
 </head>
 
 <body>
-    <div class="ribbon">
-        <a onclick="window.print()">Print me!</a>
-    </div>
-    <section class="hero is-primary">
-        <div class="hero-body">
+    <div id="resume-pdf">
+        <section class="hero is-primary">
+            <div class="hero-body">
+                <div class="resume-container">
+                    <div class="resume-columns">
+                        <div class="resume-column is-3">
+                            <figure class="image" style="height: 100%">
+                                <img class="is-rounded" src="images/about.jpg" style="height: 100%;width: auto;">
+                            </figure>
+                        </div>
+                        <div class="resume-column is-9">
+                            <p class="resume-title">
+                                $title$
+                            </p>
+                            <p class="resume-subtitle">
+                                $subtitle$
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <main class="resume-section">
             <div class="resume-container">
                 <div class="resume-columns">
-                    <div class="resume-column is-3">
-                        <figure class="image" style="height: 100%">
-                            <img class="is-rounded" src="images/about.jpg" style="height: 100%;width: auto;">
-                        </figure>
+                    <div class="resume-column is-5 is-white">
+                        <div class="resume-item">
+                            $partial("html/resume/interests.template.html")$
+                        </div>
+                        <div class="resume-item">
+                            $partial("html/resume/languages.template.html")$
+                        </div>
+                        <div class="resume-item">
+                            $partial("html/resume/contact.template.html")$
+                        </div>
                     </div>
-                    <div class="resume-column is-9">
-                        <p class="resume-title">
-                            $title$
-                        </p>
-                        <p class="resume-subtitle">
-                            $subtitle$
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <main class="resume-section">
-        <div class="resume-container">
-            <div class="resume-columns">
-                <div class="resume-column is-5 is-white">
-                    <div class="resume-item">
-                        $partial("html/resume/interests.template.html")$
-                    </div>
-                    <div class="resume-item">
-                        $partial("html/resume/languages.template.html")$
-                    </div>
-                    <div class="resume-item">
-                        $partial("html/resume/contact.template.html")$
-                    </div>
-                </div>
-                <div class="resume-column is-7 is-grey-lighter">
-                    <div class="resume-item">
-                        $partial("html/resume/ee.template.html")$
-                    </div>
-                    <div class="resume-item">
-                        $partial("html/resume/tech.template.html")$
+                    <div class="resume-column is-7 is-grey-lighter">
+                        <div class="resume-item">
+                            $partial("html/resume/ee.template.html")$
+                        </div>
+                        <div class="resume-item">
+                            $partial("html/resume/tech.template.html")$
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </main>
+        </main>
+    </div>
+    <div class="ribbon">
+        <a onclick="printPdf()">Print me!</a>
+    </div>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
