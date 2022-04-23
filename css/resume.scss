@@ -93,8 +93,8 @@ html {
 .tile.is-ancestor  {
     margin-bottom: 0px !important;
 }
-.tile.is-parent.is-vertical:first-child {
-    padding: 1rem 1.5rem;
+.tile.is-parent.is-vertical {
+    padding: 2em 1.5em;
 }
 
 @mixin tile-background($name, $color) {
