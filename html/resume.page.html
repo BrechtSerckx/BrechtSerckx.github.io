@@ -148,16 +148,14 @@ content:
                     $content.contact.title$
                 </p>
                 <div class="content">
-                    <ul>
-                        <table>
-                            $for(content.contact.items)$
-                            <tr>
-                                <td>$icon$</td>
-                                <td>$text$</td>
-                            </tr>
-                            $endfor$
-                        </table>
-                    </ul>
+                    <table>
+                        $for(content.contact.items)$
+                        <tr>
+                            <td>$icon$</td>
+                            <td>$text$</td>
+                        </tr>
+                        $endfor$
+                    </table>
                 </div>
             </div>
         </div>
