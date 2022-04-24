@@ -6,4 +6,4 @@
 	url = https://github.com/Wikiki/bulma-timeline.git
 [submodule "bulma-list"]
 	path = bulma-list
-	url = https://github.com/bluefantail/bulma-list.git
+	url = https://github.com/BrechtSerckx/bulma-list.git
