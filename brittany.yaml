@@ -1,0 +1,29 @@
+conf_forward:
+  options_ghc:
+  - -XArrows
+  - -XAllowAmbiguousTypes
+  - -XDataKinds
+  - -XDeriveGeneric
+  - -XDerivingVia
+  - -XGADTs
+  - -XFlexibleContexts
+  - -XFlexibleInstances
+  - -XInstanceSigs
+  - -XKindSignatures
+  - -XLambdaCase
+  - -XMultiParamTypeClasses
+  - -XMultiWayIf
+  - -XOverloadedStrings
+  - -XPackageImports
+  - -XPatternSynonyms
+  - -XPolyKinds
+  - -XRecordWildCards
+  - -XScopedTypeVariables
+  - -XStrictData
+  - -XTemplateHaskell
+  - -XTupleSections
+  - -XTypeApplications
+  - -XViewPatterns
+
+conf_layout:
+  config_indentAmount: 2

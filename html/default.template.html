@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    $if(title)$
+    <title>$sitename$ - $title$</title>
+    $else$
+    <title>$sitename$</title>
+    $endif$
+    <link rel="stylesheet" href="/css/default.css" />
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <script defer="defer" src="/js/default.js" type="text/javascript"></script>
+</head>
+
+<body>
+    <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
+        <div class="container is-max-desktop">
+            <div class="navbar-brand">
+                <a class="navbar-item" href="/">
+                    <img src="/images/icon.svg" width="28px" height="28px" />
+                    <div class="ml-2">
+                        <span class="navbar-sitename is-4">
+                            $sitename$
+                        </span>
+                    </div>
+                </a>
+
+                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbar">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+            </div>
+
+            <div id="navbar" class="navbar-menu">
+                <div class="navbar-end">
+                    $for(navbar.items)$
+                    <a href="$link$" class="navbar-item">
+                        $title$
+                    </a>
+                    $endfor$
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main role="main" class="section">
+        <div class="container is-max-desktop">
+            <div class="box">
+                $if(title)$
+                <h1 class="title is-3">$title$</h1>
+                $endif$
+                $body$
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container is-max-desktop">
+            <div class="level is-mobile">
+                $for(footer.links)$
+                <div class="level-item has-text-centered">
+                    <a href="$link$" target="_blank" rel="noopener noreferrer">
+                        $partial(icon)$
+                    </a>
+                </div>
+                $endfor$
+                <div class="level-item has-text-centered">
+                    <div class="is-clickable js-modal-trigger" data-target="modal-credits">
+                        $partial("images/footer/links/credits.svg")$
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <div id="modal-credits" class="modal">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">Credits</p>
+                <button class="delete" aria-label="close"></button>
+            </header>
+            <section class="modal-card-body">
+                <ul>
+                    $for(footer.credits)$
+                    <li>
+                        $body$
+                    </li>
+                    $endfor$
+                </ul>
+            </section>
+            <footer class="modal-card-foot">
+                <button class="button is-success" aria-label="close">Thanks dudes!</button>
+            </footer>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,69 @@
+---
+template: 'html/default.template.html'
+title: Projects
+items:
+- title: This website
+  enabled: true
+  text:
+      <iframe src="/" width="100%" height="400px">
+        This website.
+      </iframe>
+- title: 'Secret Santa'
+  text:
+    pandoc: md
+    value: |
+      Do you want to make a Secret Santa?
+      Go to [My Secret Santa](https://secret-santa.link)!
+      Made with:
+
+      <div class="content">
+        - Haskell + Nix
+        - Reflex-FRP
+        - Servant
+        - Polysemy
+        - AWS SES
+        - Love
+      </div>
+- title: Recycle
+  enabled: true
+  text:
+    pandoc: md
+    value: |
+      Out of frustration of the non-existing notifications from [recycleapp.be](https://recycleapp.be), I decided to make my own alternative, with blackjack and hookers.  
+      [Recycle ICS generator](https://recycle.brechtserckx.be) allows you to generate ICS files for waste collections, and more importantly, let your calendar auto-update them for you.  
+      Use case: I have it configured to display the collections from 2 weeks before until 4 weeks after the current date in my calendar, and to give me reminders for collections.
+- title:
+  text:
+    pandoc: md
+    value: |
+      Smirk
+- title:
+  text:
+    pandoc: md
+    value: |
+      joyride
+---
+<!-- small introduction text about this website -->
+$if(text)$
+<div class="block">
+    $text$
+</div>
+$endif$
+
+<!-- <h2 class="title is-4">$title$</h2> -->
+
+<!-- professional passtime -->
+<div class="block">
+    <div class="list">
+        $for(items)$
+        $if(enabled)$
+        <div class="list-item">
+            <div class="list-item-content">
+                <div class="list-item-title">$title$</div>
+                <div class="list-item-description">$text$</div>
+            </div>
+        </div>
+        $endif$
+        $endfor$
+    </div>
+</div>

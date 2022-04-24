@@ -1,0 +1,17 @@
+<p class="resume-section-title">
+  $content.tech.title$
+</p>
+<div class="columns">
+  $for(content.tech.columns)$
+  <div class="column content">
+    <table>
+      $for(items)$
+      <tr>
+        <td>$name$</td>
+        <td>$level$</td>
+      </tr>
+      $endfor$
+    </table>
+  </div>
+  $endfor$
+</div>

@@ -1,1 +1,1 @@
-(import ./release.nix).brechtserckx-be-hakyll
+(import ./release.nix).brechtserckx-be

@@ -7,7 +7,8 @@ let
       gitignore = path:
         super.nix-gitignore.gitignoreSourcePure [ (path + /.gitignore) ] path;
       overrides = selfh: superh: {
-        brechtserckx-be-hakyll = superh.callCabal2nix "brechtserckx-be-hakyll" (gitignore ./.) {};
+        brechtserckx-be = superh.callCabal2nix "brechtserckx-be" (gitignore ./.) {};
+        hakyll-sass = hlib.markUnbroken superh.hakyll-sass;
       };
     in {
       haskellPackages = super.haskellPackages.override (old: {

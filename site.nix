@@ -12,7 +12,7 @@ in pkgs.stdenv.mkDerivation {
   buildPhase = ''
       export LOCALE_ARCHIVE="${pkgs.glibcLocales}/lib/locale/locale-archive";
       export LANG=en_US.UTF-8
-      brechtserckx-be-hakyll build
+      brechtserckx-be build
 
       mkdir $out
       cp -r _site/* $out
