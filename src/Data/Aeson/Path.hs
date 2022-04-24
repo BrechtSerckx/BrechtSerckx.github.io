@@ -42,8 +42,8 @@ lookupPath (Index i : _) v = Left $ ExpectedArray i v
 
 pathParser :: Parsec.Parser JSONPath
 pathParser =
-  let keyParser =
-          fmap (Key . Text.pack) $ Parsec.char '.' >> Parsec.many Parsec.alphaNum
+  let keyParser = fmap (Key . Text.pack) $ Parsec.char '.' >> Parsec.many
+        (Parsec.alphaNum <|> Parsec.char '_' <|> Parsec.char '-')
       indexParser =
           fmap (Index . read)
             . Parsec.between (Parsec.char '[') (Parsec.char ']')
