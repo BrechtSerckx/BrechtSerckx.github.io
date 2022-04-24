@@ -172,6 +172,9 @@ body {
     .modal {
         visibility: hidden;
     }
+    a {
+        color: $black;
+    }
 }
 @media not print {
     .ribbon {
