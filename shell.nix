@@ -10,5 +10,6 @@ in pkgs.haskellPackages.shellFor {
     haskellPackages.hakyll
     nodePackages.js-beautify
     (import sources.niv {}).niv
+    (import sources.nixpkgs-act {}).act
   ];
 }

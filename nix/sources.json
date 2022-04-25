@@ -34,5 +34,11 @@
         "type": "tarball",
         "url": "https://github.com/NixOS/nixpkgs/archive/327368f98c6a927a84aed3c2f2fd1a7f6983e855.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "nixpkgs-act": {
+        "branch": "master",
+        "repo": "https://github.com/NixOS/nixpkgs.git",
+        "rev": "8540876319735c0891f25c8c7c9d8475159ae8fe",
+        "type": "git"
     }
 }
