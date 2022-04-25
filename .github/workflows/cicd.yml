@@ -1,0 +1,56 @@
+name: build-and-deploy
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+  workflow_dispatch:
+
+env:
+  cache-name: brechtserckx-be
+  pages-branch: github-pages
+  pages-folder: _site
+
+jobs:
+
+  #########
+  # Build #
+  #########
+
+  build-and-cache:
+    name: Build and cache
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          submodules: true
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v17
+
+      - name: Test Nix install
+        run: nix-build --version
+
+      - uses: cachix/cachix-action@v10
+        with:
+          name: '${{ env.cache-name }}'
+          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+
+      - name: Build release with Nix
+        run: nix-build --no-out-link default.nix
+
+      - name: Build site with Nix
+        if: (!(github.event_name == 'push' && github.ref == 'refs/heads/master'))
+        run: nix-build --no-out-link site.nix
+
+      - name: Generate site
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+        run: $(nix-build --no-out-link default.nix)/bin/brechtserckx-be build
+
+      - name: Deploy site
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+        uses: JamesIves/github-pages-deploy-action@v4.3.0
+        with:
+          branch: ${{ env.pages-branch }}
+          folder: ${{ env.pages-folder }}
