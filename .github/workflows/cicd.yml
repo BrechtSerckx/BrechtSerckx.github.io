@@ -38,20 +38,12 @@ jobs:
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
           extraPullNames: 'iohk'
 
-      - name: Build release with Nix
-        run: nix-build --no-out-link default.nix
-
       - name: Build site with Nix
-        if: (!(github.event_name == 'push' && github.ref == 'refs/heads/master'))
-        run: nix-build --no-out-link site.nix
-
-      - name: Generate site
-        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
-        run: $(nix-build --no-out-link default.nix)/bin/brechtserckx-be build
+        run: nix-build site.nix
 
       - name: Deploy site
         if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         uses: JamesIves/github-pages-deploy-action@v4.3.0
         with:
           branch: ${{ env.pages-branch }}
-          folder: ${{ env.pages-folder }}
+          folder: result
