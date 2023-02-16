@@ -37,7 +37,7 @@ html {
     list-style-type: '> ';
     list-style-position: outside;
     margin-left: 1em;
-    margin-top: 1em;
+    margin-top: 0.5em;
 }
 
 .content table td {
@@ -89,7 +89,7 @@ html {
 
 .resume-subsection-title {
     @extend .title;
-    @extend .is-5;
+    @extend .is-6;
     @extend .has-text-weight-bold;
     @extend .is-family-monospace;
 }
@@ -98,6 +98,7 @@ html {
     @extend .subtitle;
     @extend .is-6;
     @extend .is-italic;
+    margin-bottom: 0.5rem !important;
 }
 
 body {
