@@ -1,8 +1,7 @@
 let
-  sources = import ./nix/sources.nix;
-  pkgs = import sources.nixpkgs {};
+  pkgs = import nix/pkgs.nix;
   stdenv = pkgs.stdenv;
-  site = import ./default.nix;
+  site = (import ./default.nix).brechtserckx-be.components.exes.brechtserckx-be;
 in pkgs.stdenv.mkDerivation {
   name = "brechtserckx-be";
   version = "1.0";

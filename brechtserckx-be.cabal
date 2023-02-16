@@ -21,18 +21,18 @@ executable brechtserckx-be
     -threaded
     -Wall
   build-depends:
-      base == 4.*
-    , hakyll == 4.13.*
-    , filepath >= 1.4
-    , aeson >= 1.4
-    , unordered-containers >= 0.2
-    , vector >= 0.12
-    , parsec >= 3.1
-    , text >= 1.2
-    , pandoc >= 2.10
-    , hakyll-sass >= 0.2.4 && < 0.3
-    , yaml >= 0.11
-    , bytestring >= 0.10
+      base
+    , hakyll
+    , filepath
+    , aeson
+    , unordered-containers
+    , vector
+    , parsec
+    , text
+    , pandoc
+    , hakyll-sass
+    , yaml
+    , bytestring
   hs-source-dirs:
     .
     src

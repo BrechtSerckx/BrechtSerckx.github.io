@@ -1,14 +1,14 @@
 {
-    "gitignore.nix": {
+    "haskellNix": {
         "branch": "master",
-        "description": "Nix function for filtering local git sources",
-        "homepage": "",
-        "owner": "hercules-ci",
-        "repo": "gitignore.nix",
-        "rev": "211907489e9f198594c0eb0ca9256a1949c9d412",
-        "sha256": "06j7wpvj54khw0z10fjyi31kpafkr6hi1k0di13k1xp8kywvfyx8",
+        "description": "Alternative Haskell Infrastructure for Nixpkgs",
+        "homepage": "https://input-output-hk.github.io/haskell.nix",
+        "owner": "input-output-hk",
+        "repo": "haskell.nix",
+        "rev": "834a120d3607fbb5fd9151f6881c77f489e9e94b",
+        "sha256": "1j4lqxdfn4328jsiyf36205wyg2lhy9y8m86balfdbxjl6y67svr",
         "type": "tarball",
-        "url": "https://github.com/hercules-ci/gitignore.nix/archive/211907489e9f198594c0eb0ca9256a1949c9d412.tar.gz",
+        "url": "https://github.com/input-output-hk/haskell.nix/archive/834a120d3607fbb5fd9151f6881c77f489e9e94b.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "niv": {
@@ -21,18 +21,6 @@
         "sha256": "1j5p8mi1wi3pdcq0lfb881p97i232si07nb605dl92cjwnira88c",
         "type": "tarball",
         "url": "https://github.com/nmattia/niv/archive/df49d53b71ad5b6b5847b32e5254924d60703c46.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
-    "nixpkgs": {
-        "branch": "nixos-20.09",
-        "description": "Nix Packages collection",
-        "homepage": "",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "327368f98c6a927a84aed3c2f2fd1a7f6983e855",
-        "sha256": "153qm1chir2kzd98dxg35afn1ybzlwfpx9n2mps08ssmaj1zxzvi",
-        "type": "tarball",
-        "url": "https://github.com/NixOS/nixpkgs/archive/327368f98c6a927a84aed3c2f2fd1a7f6983e855.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixpkgs-act": {
