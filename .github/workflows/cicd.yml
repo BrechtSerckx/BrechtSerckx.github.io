@@ -39,7 +39,7 @@ jobs:
           extraPullNames: 'iohk'
 
       - name: Build site with Nix
-        run: nix build '.?submodules=1'
+        run: nix build --accept-flake-config '.?submodules=1'
 
       - name: Deploy site
         if: github.event_name == 'push' && github.ref == 'refs/heads/master'
