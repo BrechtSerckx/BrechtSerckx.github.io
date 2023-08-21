@@ -27,7 +27,7 @@ jobs:
           submodules: true
 
       - name: Install Nix
-        uses: cachix/install-nix-action@v19
+        uses: cachix/install-nix-action@v22
 
       - name: Test Nix install
         run: nix-build --version
@@ -36,10 +36,9 @@ jobs:
         with:
           name: '${{ env.cache-name }}'
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-          extraPullNames: 'iohk'
 
       - name: Build site with Nix
-        run: nix-build site.nix
+        run: nix build --accept-flake-config '.?submodules=1'
 
       - name: Deploy site
         if: github.event_name == 'push' && github.ref == 'refs/heads/master'
