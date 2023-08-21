@@ -34,8 +34,6 @@
                 buildInputs = with pkgs; [
                   # nix formatter
                   nixpkgs-fmt
-                  # hakyll-init
-                  haskellPackages.hakyll
                   # web formatter
                   nodePackages.js-beautify
                   # run github workflows locally
