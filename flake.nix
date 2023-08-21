@@ -24,21 +24,22 @@
                 withHoogle = true;
                 tools = {
                   cabal = "latest";
-                  # hlint = "3.2.8";
-                  # haskell-language-server = "1.8.0.0";
-                  # ghcid = "latest";
-                  # brittany = "0.13.1.2";
+                  hlint = "3.2.8";
+                  haskell-language-server = "1.8.0.0";
+                  ghcid = "latest";
+                  brittany = "0.13.1.2";
                 };
 
                 # Non-Haskell shell tools go here
                 buildInputs = with pkgs; [
-                  # nixpkgs-fmt
+                  # nix formatter
+                  nixpkgs-fmt
                   # hakyll-init
-                  # haskellPackages.hakyll
+                  haskellPackages.hakyll
                   # web formatter
-                  # nodePackages.js-beautify
-                  # act
-                  # nixpkgs-act.act
+                  nodePackages.js-beautify
+                  # run github workflows locally
+                  nixpkgs-act.legacyPackages.${system}.act
                 ];
 
                 # Prevents cabal from choosing alternate plans, so that
