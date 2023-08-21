@@ -9,7 +9,7 @@
       overlays = [ haskellNix.overlay
         (final: prev: {
           # This overlay adds our project to pkgs
-          brechtserckx-be =
+          hsPkgs =
             final.haskell-nix.project {
               src = final.haskell-nix.haskellLib.cleanGit {
                 name = "brechtserckx-be";
@@ -47,14 +47,30 @@
                 exactDeps = true;
               };
             };
+          brechtserckx-be-site = pkgs.stdenv.mkDerivation {
+            name = "brechtserckx-be-site";
+            version = "1.0";
+            buildInputs = [final.hsPkgs.brechtserckx-be.components.exes.brechtserckx-be ];
+            src = pkgs.nix-gitignore.gitignoreSourcePure [ ./.gitignore ] ./.;
+            phases = "unpackPhase buildPhase";
+            buildPhase = ''
+                export LOCALE_ARCHIVE="${pkgs.glibcLocales}/lib/locale/locale-archive";
+                export LANG=en_US.UTF-8
+                brechtserckx-be build
+
+                mkdir $out
+                cp -r _site/* $out
+            '';
+          } ;
+
         })
       ];
       pkgs = import nixpkgs { inherit system overlays; inherit (haskellNix) config; };
-      flake = pkgs.brechtserckx-be.flake {};
+      flake = pkgs.hsPkgs.flake {};
 
     in flake // {
         # Built by `nix build .`
-        packages.default = flake.packages."brechtserckx-be:exe:brechtserckx-be";
+        packages.default = pkgs."brechtserckx-be-site";
       });
 
   # --- Flake Local Nix Configuration ----------------------------
